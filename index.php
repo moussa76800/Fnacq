@@ -38,29 +38,25 @@ try {
         case "materielsInformatiques":
             $informatiqueController->afficherInformatique();
         case "livres":
-            $livreController->afficherLivre();
-            switch ($url[1]) {
-                case "display":
-            $livreController->afficherUnLivre($id);
-                    break;
-                case "modify":
+            if (empty($url[1])) {
+                $livreController->afficherLivres();
+            } else if ($url[1] === "display") {
+                $livreController->afficherUnLivre($url[2]);
+            } else if ($url[1] === "modify") {
+                $livreController->modificationLivre($url[2]);
+            } else if ($url[1] === "validationModif") {
+                $livreController->modifLivreValidation();
+            } else if ($url[1] === "add") {
+                $livreController->ajoutLivre();
+            } else if ($url[1] === "validationAjout") {
+                $livreController->ajoutLivreValidation();
+            } else if ($url[1] === "delete") {
+                $livreController->suppressionLivre($url[2]);
+            } else {
 
-                    break;
-                case "validationModif":
-
-                    break;
-                case "add":
-
-                    break;
-                case "validationAjout":
-
-                    break;
-                case "delete":
-                    break;
-
-                default:
-                    throw new Exception("Veuillez transmettre la bonne rubrique !!");
+                throw new Exception("La page est inéxistante..");
             }
+            break;
 
         case "login":
             $visiteurController->login();

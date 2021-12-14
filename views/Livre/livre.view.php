@@ -1,4 +1,5 @@
 
+
 <h1 class="rounded border border-dark p-2 m-2 text-center text-white bg-success">LISTE DES LIVRES</h1>
     <table class="table text-center">
     <tr class="table-dark">
@@ -11,10 +12,13 @@
     </tr>
 
     
-
+     
     <?php
-    
-       for ($i=0; $i<$livres(); $i++) : ?>
+         
+         
+        
+         for ($i=0; $i< count($livres); $i++) : ?>
+       
         <tr>
             <td class="align-middle"><img src="public/Assets/images/livres/<?= $livres[$i]->getImage();?>" width="60px;"></td>
             <td class="align-middle"><a href="<?= URL ?>livres/display/<?= $livres[$i]->getId(); ?>"><?= $livres[$i]->getTitle(); ?></a></td>

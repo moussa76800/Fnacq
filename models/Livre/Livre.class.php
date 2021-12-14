@@ -8,7 +8,7 @@ class Livre {
     private $price;
     private $image;
 
-    public static $livres;
+   
 
     public function __construct($id, $title, $authors, $numbersOfPages,$price, $image){
     

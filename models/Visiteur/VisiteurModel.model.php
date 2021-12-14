@@ -29,15 +29,15 @@ class VisiteurManager extends MainManager
     public function InscriptionBD($login, $passwordCrypte, $email, $clef)
     {
 
-        $req = "INSERT INTO utilisateur(login,password,email,role,image,est_valide,clef,nom,prenom,adresse,code_postal,date_de_naissance)
- VALUES (:login,:password,:email,:'utilisateur',:'',: 0,:clef,:nom,:prenom,:adresse,:code_postal,:date_de_naissance)";
+        $req = "INSERT INTO utilisateur (login,password,email,role,image,est_valide,clef,nom,prenom,adresse,code_postal,date_de_naissance)
+ VALUES (:login,:password,:email,'utilisateur','', 0,:clef,:nom,:prenom,:adresse,:code_postal,:date_de_naissance)";
         $stmt = $this->getBdd()->prepare($req);
         $stmt->bindValue(":login", $login, PDO::PARAM_STR);
         $stmt->bindValue(":password", $passwordCrypte, PDO::PARAM_STR);
         $stmt->bindValue(":email", $email, PDO::PARAM_STR);
         $stmt->bindValue(":clef", $clef, PDO::PARAM_INT);
         $stmt->execute();
-        $estModifier = ($stmt->rowCount() > 0);
+        $estModifier = ($stmt -> rowCount() > 0);
         $stmt->closeCursor();
         return $estModifier;
     }
