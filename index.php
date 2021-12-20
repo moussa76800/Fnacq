@@ -11,14 +11,16 @@ require_once("./controllers/Utilisateur/UtilisateurController.controller.php");
 require_once("./controllers/Livre/LivreController.controller.php");
 require_once("./controllers/Informatique/InformatiqueController.controller.php");
 require_once("./controllers/Hifi/HifiController.controller.php");
-
+require_once("./controllers/Tchat/TchatsControllers.controller.php");
+require_once("./controllers/Blog/blogController.controller.php");
 
 $visiteurController = new VisiteurController();
 $utilisateurController = new UtilisateurController();
 $livreController = new LivreController();
 $informatiqueController = new InformatiqueController();
 $hifiController = new HifiController();
-
+$tchatController = new TchatsControllers();
+$blogController = new BlogController();
 
 try {
     if (empty($_GET['page'])) {
@@ -89,6 +91,10 @@ try {
                 header('Location: ' . URL . "inscription");
             }
             break;
+        case "validationMail":
+            echo "test";
+            break;
+
         case "compte":
             if (!Securite::estConnecte()) {
                 Toolbox::ajouterMessageAlerte("Veuillez vous connecter !!", Toolbox::COULEUR_ROUGE);
@@ -101,9 +107,49 @@ try {
                     case "deconnection":
                         $utilisateurController->deconnection();
                         break;
+                    case "validation_modificationMail":
+                        echo "walou";
+                        break;
+                    case "modificationPassword":
+                        $utilisateurController->modifPassword();
+                        break;
+                    case "validation_modificationPassword":
+                        if (!empty($_POST['oldPassword']) && !empty($_POST['newPassword']) && !empty($_POST['confirmNewPassword'])) {
+                            $oldPassword = Securite::secureHTML($_POST['oldPassword']);
+                            $newPassword = Securite::secureHTML($_POST['newPassword']);
+                            $confirmNewPassword = Securite::secureHTML($_POST['confirmNewPassword']);
+                            $utilisateurController->validation_modificationPassword($oldPassword, $newPassword, $confirmNewPassword);
+                        } else {
+                            Toolbox::ajouterMessageAlerte("vous n'avez pas renseigné toutes les informations necessaires pour la modification du mot de passe !!!", Toolbox::COULEUR_ROUGE);
+                            header("Location: " . URL . "compte/modificationPassword");
+                        }
+                        break;
+                    case "suppressionCompte":
+                        break;
                     default:
                         throw new Exception("Veuillez transmettre la bonne rubrique !!");
                 }
+            }
+            break;
+        case "tchat":
+            if (isset($_POST['submit'])) {
+                if (!Securite::estConnecte()) {
+                    Toolbox::ajouterMessageAlerte("Veuillez-vous connecter ou vous inscrire pour intéragir dans le chat !!!", Toolbox::COULEUR_ROUGE);
+                    $tchatController->afficherTchat();
+                } else {
+
+                    $tchatController->ajoutTchat($_POST['user'], $_POST['message']);
+                    Toolbox::ajouterMessageAlerte("votre message est enregistré.", Toolbox::COULEUR_VERTE);
+                    $tchatController->afficherTchat();
+                }
+            } else {
+                $tchatController->afficherTchat();
+            }
+
+            break;
+        case "blog":
+            if (isset($_POST['submit'])) {
+                $blogController->ajoutBlog($_POST['user'], $_POST['titre'], $_POST['contenu'], $_POST['date_time_publication']);
             }
             break;
         default:

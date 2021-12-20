@@ -35,7 +35,7 @@ class UtilisateurController extends MainController
         }
     }
 
-    
+
 
 
     public function profil()
@@ -52,13 +52,50 @@ class UtilisateurController extends MainController
         ];
         $this->genererPage($data_page);
     }
-    
 
-    public function deconnection(){
-        Toolbox::ajouterMessageAlerte("La déconnexion a été établie avec succès",Toolbox::COULEUR_VERTE);
+
+    public function deconnection()
+    {
+        Toolbox::ajouterMessageAlerte("La déconnexion a été établie avec succès", Toolbox::COULEUR_VERTE);
         unset($_SESSION['profil']);
-        header('Location: '.URL."accueil");
+        header('Location: ' . URL . "accueil");
     }
+
+    public function modifPassword()
+    {
+        $data_page = [
+            "page_description" => "Page de modification du mot de passe",
+            "page_title" => "Page de modification du mot de passe",
+            "page_javascript" => ["modificationPassword.js"],
+            "view" => "views/Utilisateur/modificationPassword.view.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->genererPage($data_page);
+    }
+
+    public function validation_modificationPassword($oldPassword,$newPassword,$confirmNewPassword)
+    {
+        if ($newPassword === $confirmNewPassword) {
+            if ($this->utilisateurManager->isCombinaisonValide($_SESSION['profil']['login'], $oldPassword)) {
+               $passwordCrypte= password_hash($newPassword,PASSWORD_DEFAULT);
+               if($this->utilisateurManager->modificationPasswordDB($_SESSION['profil']['login'],$passwordCrypte)){
+                   Toolbox::ajouterMessageAlerte("La modification du mot de passe à été effectuée avec succes !!",Toolbox::COULEUR_VERTE);
+                   header("Location: ".URL."compte/profil");
+               }else{
+                Toolbox::ajouterMessageAlerte("La modification a échouée!!!", Toolbox::COULEUR_ROUGE);
+                header("Location: ".URL."compte/modificationPassword");
+               }
+            } else {
+                Toolbox::ajouterMessageAlerte("La combinaison login et du mot de passe d'origine ne correspondent pas  !!!", Toolbox::COULEUR_ROUGE);
+                header("Location: ".URL."compte/modificationPassword");
+            }
+        } else {
+            Toolbox::ajouterMessageAlerte("Les mots de passes ne correspondent pas !!!", Toolbox::COULEUR_ROUGE);
+            header("Location: " . URL . "compte/modificationPassword");
+        }
+    }
+
+
 
     public function pageErreur($msg)
     {

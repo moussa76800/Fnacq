@@ -1,4 +1,7 @@
-<h1>PAGE D'INSCRIPTION</h1>
+<h1 class="rounded border border-dark p-2 m-2 text-center text-white bg-success">PAGE D'INSCRIPTION</h1>
+<br>
+<br>
+
 
 <form method="POST" action="validation_inscription">
     <div class="mb-3">

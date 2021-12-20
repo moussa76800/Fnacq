@@ -12,4 +12,14 @@ class Toolbox
             "type" => $type
         ];
     }
+
+    public static function sendMail($destinataire, $sujet, $message)
+    {
+        $headers = "From: moussa76b@gmail.com";
+        if (mail($destinataire, $sujet, $message,$headers)) {
+            self::ajouterMessageAlerte("email bien envoyé !!", self::COULEUR_VERTE);
+        } else {
+            self::ajouterMessageAlerte("echec de l'envoie de l'email !!!", self::COULEUR_ROUGE);
+        }
+    }
 }
