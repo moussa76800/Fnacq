@@ -17,7 +17,7 @@
             <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" required >
         </div>
         <div class="alert alert-danger d-none" id="erreur">
-            Les mots de passes ne sont identiques !!!!
+            Les mots de passes ne sont pas identiques !!!!
         </div>
 
         

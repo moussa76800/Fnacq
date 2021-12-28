@@ -68,6 +68,7 @@ try {
                 $login = Securite::secureHTML($_POST['login']);
                 $password = Securite::secureHTML($_POST['password']);
                 $utilisateurController->validation_login($login, $password);
+                
             } else {
                 Toolbox::ajouterMessageAlerte("Login ou mot de passe non renseigné", Toolbox::COULEUR_ROUGE);
                 header('Location: ' . URL . "login");
@@ -85,7 +86,7 @@ try {
                 $adresse = Securite::secureHTML($_POST['adresse']);
                 $code_postal = Securite::secureHTML($_POST['code_postal']);
                 $date_de_naissance = Securite::secureHTML($_POST['date_de_naissance']);
-                $visiteurController->validation_inscription($login, $password, $email, $nom, $prenom, $adresse, $code_postal, $date_de_naissance);
+                $utilisateurController->validation_inscription($login, $password, $email, $nom, $prenom, $adresse, $code_postal, $date_de_naissance);
             } else {
                 Toolbox::ajouterMessageAlerte("Veuillez insérer toutes les informations recquises !!", Toolbox::COULEUR_ROUGE);
                 header('Location: ' . URL . "inscription");
@@ -105,11 +106,26 @@ try {
                         $utilisateurController->profil();
                         break;
                     case "deconnection":
-                        $utilisateurController->deconnection();
+                        $utilisateurController->deconnexion();
                         break;
-                    case "validation_modificationMail":
+                        case "renvoyezMailValidation":
+                            
+                            break;
+                    case "validation_modificationMail":$utilisateurController->renvoyerMailValidation($url[1]);
                         echo "walou";
                         break;
+                        case"modificationPostal":
+                            $utilisateurController->modifPostal();
+                        case "validation_modificationCodePostal":
+                            if (!empty($_POST['oldPostal']) && !empty($_POST['newPostal'])) {
+                                $oldPostal = Securite::secureHTML($_POST['oldPostal']);
+                                $newPostal = Securite::secureHTML($_POST['newPostal']); 
+                                $utilisateurController->validation_modificationPostal($oldPostal, $newPostal);
+                            } else {
+                                Toolbox::ajouterMessageAlerte("vous n'avez pas renseigné toutes les informations necessaires pour la modification du code postal !!!", Toolbox::COULEUR_ROUGE);
+                                header("Location: " . URL . "compte/modificationCodePostal");
+                            }
+                            break;
                     case "modificationPassword":
                         $utilisateurController->modifPassword();
                         break;
@@ -124,7 +140,16 @@ try {
                             header("Location: " . URL . "compte/modificationPassword");
                         }
                         break;
-                    case "suppressionCompte":
+                        case "validation_modificationImage" :
+                            if($_FILES['image']['size'] > 0) {
+                                $utilisateurController->validation_modificationImage($_FILES['image']);
+                            } else {
+                                Toolbox::ajouterMessageAlerte("Vous n'avez pas modifié l'image", Toolbox::COULEUR_ROUGE);
+                                header("Location: ".URL."compte/profil");
+                            }
+                        break;
+                    case "validation_suppressionCompte":
+                        $utilisateurController->validation_suppressionCompte();
                         break;
                     default:
                         throw new Exception("Veuillez transmettre la bonne rubrique !!");
