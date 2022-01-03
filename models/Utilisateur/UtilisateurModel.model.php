@@ -17,6 +17,16 @@ class UtilisateurManager extends MainManager
         return $resultat['password'];
     }
 
+    private function getPostalUser($login)
+    {
+        $req = "SELECT code_postal FROM utilisateur WHERE login= :login";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":login", $login, PDO::PARAM_STR);
+        $stmt->execute();
+        $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $resultat['code_postal'];
+    }
 
 
     
@@ -31,6 +41,18 @@ class UtilisateurManager extends MainManager
         return ((int)$resultat['est_valide'] === 1) ? true : false;
     }
 
+    public function userBloque($login)
+    {
+        $req = "SELECT est_valide FROM utilisateur WHERE login= :login";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":login", $login, PDO::PARAM_STR);
+        $stmt->execute();
+        $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return ((int)$resultat['est_valide'] === 0) ? true : false;
+    }
+
+
 
     public function isCombinaisonValide($login, $password)
     {
@@ -38,6 +60,12 @@ class UtilisateurManager extends MainManager
         return password_verify($password, $passwordBD);
     }
 
+
+    public function isCombinaisonPostalValide($login, $code_postal)
+    {
+        $postalBD = $this->getPostalUser($login);
+        return ($code_postal=== $postalBD);
+    }
     
     public function getUserInformation($login)
     {
@@ -128,6 +156,30 @@ class UtilisateurManager extends MainManager
         $stmt->closeCursor();
         return $resultat['image'];
     }
+
+
+    public function bdValidationMailCompte($login,$clef){
+        $req = "UPDATE utilisateur set est_valide = 1 WHERE login = :login and clef = :clef";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":login",$login,PDO::PARAM_STR);
+        $stmt->bindValue(":clef",$clef,PDO::PARAM_INT);
+        $stmt->execute();
+        $estModifier = ($stmt->rowCount() > 0);
+        $stmt->closeCursor();
+        return $estModifier;
+    }
+
+    public function bdModificationMailUser($login,$email){
+        $req = "UPDATE utilisateur set email = :email WHERE login = :login";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":login",$login,PDO::PARAM_STR);
+        $stmt->bindValue(":email",$email,PDO::PARAM_STR);
+        $stmt->execute();
+        $estModifier = ($stmt->rowCount() > 0);
+        $stmt->closeCursor();
+        return $estModifier;
+    }
+
     public function validation_suppressionCompteDB($login)
     {
         $req = "DELETE FROM utilisateur WHERE login=:login";

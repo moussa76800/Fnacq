@@ -26,13 +26,17 @@ class UtilisateurController extends MainController
                 $_SESSION['profil'] = ["login" => $login];
                 header("Location: " . URL . "compte/profil");
             } else {
-                $msg="Le compte " . $login . " n'a pas été activé par mail !!";
-                $msg.="<a href='renvoyerMailValidaton/".$login."'>Renvoyez le mail de validation</a>";
-                Toolbox::ajouterMessageAlerte( $msg, Toolbox::COULEUR_ROUGE);
+                $msg = "Le compte " . $login . " n'a pas été activé par mail !!";
+                $msg .= "<a href='renvoyerMailValidaton/" . $login . "'>Renvoyez le mail de validation</a>";
+                Toolbox::ajouterMessageAlerte($msg, Toolbox::COULEUR_ROUGE);
                 header("Location: " . URL . "login");
             }
         } else {
             Toolbox::ajouterMessageAlerte("Combinaison Login / Mot de passe non valide", Toolbox::COULEUR_ROUGE);
+            header("Location: " . URL . "login");
+        }
+        if  ($this->utilisateurManager->userBloque($login)) {
+            Toolbox::ajouterMessageAlerte("Vous êtes un membre indésirable !! fouteur de merde", Toolbox::COULEUR_ROUGE);
             header("Location: " . URL . "login");
         }
     }
@@ -45,11 +49,9 @@ class UtilisateurController extends MainController
             if ($this->utilisateurManager->InscriptionBD($login, $passwordCrypte, $email, "utilisateur", "profil/homme.jpg", $clef, $nom, $prenom, $adresse, $code_postal, $date_de_naissance)) {
 
                 Toolbox::ajouterMessageAlerte("Le compte a a bien été crée, validez le mail envoyé pour le valider !", Toolbox::COULEUR_VERTE);
-                $this->sendMailValidation($login,$email,$clef);
+                $this->sendMailValidation($login, $email, $clef);
                 Toolbox::ajouterMessageAlerte("La compte a été créé, Un mail de validation vous a été envoyé !", Toolbox::COULEUR_VERTE);
-                header("Location: ".URL."login");
-
-               
+                header("Location: " . URL . "login");
             } else {
                 Toolbox::ajouterMessageAlerte("Une erreur est intervenue lors de la création du compte,veuillez recommencez l'inscription", Toolbox::COULEUR_ROUGE);
                 header('location: ' . URL . "inscription");
@@ -60,19 +62,46 @@ class UtilisateurController extends MainController
         }
     }
 
-    private function sendMailValidation($login,$mail,$clef){
-        $urlVerification = URL."validationMail/".$login."/".$clef;
+    private function sendMailValidation($login, $mail, $clef)
+    {
+        $urlVerification = URL . "validationMail/" . $login . "/" . $clef;
         $sujet = "Création du compte sur le site xxx";
-        $message = "Pour valider votre compte veuillez cliquer sur le lien suivant ".$urlVerification;
-        Toolbox::sendMail($mail,$sujet,$message);
+        $message = "Pour valider votre compte veuillez cliquer sur le lien suivant " . $urlVerification;
+        Toolbox::sendMail($mail, $sujet, $message);
     }
 
 
-    public function renvoyerMailValidation($login){
+    public function renvoyerMailValidation($login)
+    {
         $utilisateur = $this->utilisateurManager->getUserInformation($login);
-        $this->sendMailValidation($login,$utilisateur['mail'],$utilisateur['clef']);
-        header("Location: ".URL."login");
+        $this->sendMailValidation($login, $utilisateur['mail'], $utilisateur['clef']);
+        header("Location: " . URL . "login");
     }
+
+    public function validation_mailCompte($login, $clef)
+    {
+        if ($this->utilisateurManager->bdValidationMailCompte($login, $clef)) {
+            Toolbox::ajouterMessageAlerte("Le compte a été activé !", Toolbox::COULEUR_VERTE);
+            $_SESSION['profil'] = [
+                "login" => $login,
+            ];
+            header('Location: ' . URL . 'compte/profil');
+        } else {
+            Toolbox::ajouterMessageAlerte("Le compte n'a pas été activé !", Toolbox::COULEUR_ROUGE);
+            header('Location: ' . URL . 'creerCompte');
+        }
+    }
+
+    public function validation_modificationMail($email)
+    {
+        if ($this->utilisateurManager->bdModificationMailUser($_SESSION['profil']['login'], $email)) {
+            Toolbox::ajouterMessageAlerte("La modification est effectuée", Toolbox::COULEUR_VERTE);
+        } else {
+            Toolbox::ajouterMessageAlerte("Aucune modification effectuée", Toolbox::COULEUR_ROUGE);
+        }
+        header("Location: " . URL . "compte/profil");
+    }
+
 
     public function profil()
     {
@@ -83,6 +112,7 @@ class UtilisateurController extends MainController
             "page_description" => "Page du Profil",
             "page_title" => "Page du Profil",
             "utilisateur" => $datas,
+            "page_javascript" => ["profil.js"],
             "view" => "views/Utilisateur/profil.view.php",
             "template" => "views/common/template.php"
         ];
@@ -150,7 +180,8 @@ class UtilisateurController extends MainController
 
     public function validation_modificationPostal($oldPostal, $newPostal)
     {
-        if (Securite::estConnecte()) {
+
+        if ($this->utilisateurManager->isCombinaisonPostalValide($_SESSION['profil']['login'], $oldPostal)) {
             if ($this->utilisateurManager->bdmodifPostal($_SESSION['profil']['login'], $newPostal)) {
                 toolbox::ajouterMessageAlerte("La modification du code postal à été effectuée avec succes !!", Toolbox::COULEUR_VERTE);
                 header("Location: " . URL . "compte/profil");
@@ -160,10 +191,12 @@ class UtilisateurController extends MainController
                 header("Location: " . URL . "compte/profil");
             }
         } else {
-            Toolbox::ajouterMessageAlerte("connectez-vous !!", Toolbox::COULEUR_ROUGE);
-            header("Location: " . URL . "compte/login");
+            toolbox::ajouterMessageAlerte("L'ancien code postal ne correspond pas à celui indiqué dans le formulaire !!", Toolbox::COULEUR_ROUGE);
+            header("Location: " . URL . "compte/profil");
         }
     }
+
+
 
 
     public function validation_modificationPassword($oldPassword, $newPassword, $confirmNewPassword)

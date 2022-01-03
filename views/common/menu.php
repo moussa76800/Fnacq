@@ -26,7 +26,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
            
-            <?php if (empty($_SESSION['profil'])) : ?>
+            <?php if (!Securite::estConnecte()) : ?>
               <li><a class="dropdown-item" aria-current="page" href="<?= URL ?>inscription">Inscription</a></li>
               <li><a class="dropdown-item" aria-current="page" href="<?= URL ?>login">Connexion</a></li>
             <?php else : ?>
@@ -45,6 +45,22 @@
             <li><a class="dropdown-item" href="<?= URL ?>blog">Blog</a></a></li>
           </ul>
         </li>
+        <?php if (Securite::estConnecte() && Securite::estAdministrateur()): ?>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Administration 
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="<?= URL ?>administration/droits">Gestion des droits</a></li>
+            <li><a class="dropdown-item" href="<?= URL ?>administration/droits">Participer au mini-chat</a></li>
+            <li><a class="dropdown-item" href="<?= URL ?>administration/droits">Editer des nouveaux commentaires</a></li>
+            <li><a class="dropdown-item" href="<?= URL ?>administration/droits">Consulter le nombre de connexions d'un UM</a></li>
+            <li><a class="dropdown-item" href="<?= URL ?>administration/droits">Consulter la liste des achats effectués par un UM</a></li>
+            <li><a class="dropdown-item" href="<?= URL ?>administration/droits">Consulter les 5 derniers commentaires d'un UM</a></li>
+           
+          </ul>
+        </li>
+        <?php endif; ?>
     </div>
   </div>
 </nav>
