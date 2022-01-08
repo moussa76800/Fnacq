@@ -1,4 +1,4 @@
-<h1 class="rounded border border-dark p-2 m-2 text-center text-white bg-success">Page de gestion des droits des utilisateurs</h1>
+<h1 class="rounded border border-dark p-2 m-2 text-center text-white bg-success">User rights management page</h1>
 <br>
 <br>
 
@@ -7,7 +7,7 @@
 <table class="table ">
     <tr class="table-dark">
             <th>Login</th>
-            <th>Validé</th>
+            <th>Valid</th>
             <th>Rôle</th>
         </tr>
         <?php foreach ($utilisateurs as $utilisateur) : ?>
@@ -21,9 +21,9 @@
                         <form method="POST" action="<?= URL ?>administration/validation_modificationRole">
                             <input type="hidden" name="login" value="<?= $utilisateur['login'] ?>" />
                             <select class="form-select" name="role" onchange="confirm('confirmez vous la modification ?') ? submit() : document.location.reload()">
-                                <option value="utilisateur" <?= $utilisateur['role'] === "utilisateur"  ? "selected" : ""?>>Utilisateur</option>
-                                <option value="utilisateur_Indesirable" <?= $utilisateur['role'] === "utilisateur_Indesirable" && $utilisateur['est_valide'] === "0"  ? "selected" : ""?>> Utilisateur Indesirable</option>
-                                <option value="administrateur" <?= $utilisateur['role'] === "administrateur" ? "selected" : ""?>>Administrateur</option>
+                                <option value="utilisateur" <?= $utilisateur['role'] === "utilisateur"  ? "selected" : ""?>>User</option>
+                                <option value="utilisateur_Indesirable" <?= $utilisateur['role'] === "utilisateur_Indesirable" && $utilisateur['est_valide'] === "0"  ? "selected" : ""?>> Unwanted user</option>
+                                <option value="administrateur" <?= $utilisateur['role'] === "administrateur" ? "selected" : ""?>>Administrator</option>
                             </select>
                         </form>
                     <?php endif; ?>

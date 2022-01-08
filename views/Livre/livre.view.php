@@ -1,6 +1,6 @@
 
 
-<h1 class="rounded border border-dark p-2 m-2 text-center text-white bg-success">LISTE DES LIVRES</h1>
+<h1 class="rounded border border-dark p-2 m-2 text-center text-white bg-success">List of book</h1>
     <table class="table text-center">
     <tr class="table-dark">
         <th>IMAGE</th>
@@ -25,10 +25,10 @@
             <td class="align-middle"><?=$livres[$i]->getAuthors();?></td>
             <td class="align-middle"><?=$livres[$i]->getNumbersOfPages();?></td>
             <td class="align-middle"><?=$livres[$i]->getPrice();?> Euros</td>
-            <td class="align-middle"><a href="<?= URL ?>livres/modify/<?= $livres[$i]->getId(); ?>" class="btn btn-warning">Modifier</a></td>
+            <td class="align-middle"><a href="<?= URL ?>livres/modify/<?= $livres[$i]->getId(); ?>" class="btn btn-warning">Edit</a></td>
             <td class="align-middle">
                 <form method="POST" action="<?= URL ?>livres/delete/<?= $livres[$i]->getId(); ?>" onSubmit="return confirm('Voulez-vous vraiment supprimer le livre ?');">
-             <button class = "btn btn-danger" type="submit">Supprimer</button>
+             <button class = "btn btn-danger" type="submit">Delete</button>
              <td class="align-middle"><a href="" class="btn btn-info">Acheter</a></td>
         </form></td>
            
@@ -36,7 +36,7 @@
         <?php endfor; ?>
  </table>
 
- <a href="<?= URL ?>livres/add" class="btn btn-success d-block">Ajouter</a>
+ <a href="<?= URL ?>livres/add" class="btn btn-success d-block">Add book</a>
 
       
  

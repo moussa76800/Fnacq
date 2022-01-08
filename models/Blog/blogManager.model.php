@@ -1,11 +1,11 @@
 
 <?php
 require_once  "./models/MainManager.model.php";
-require_once "blog.class.php";
+require_once "Blog.class.php";
 
 
 
-class blogManager extends MainManager
+class BlogManager extends MainManager
 {
 
     private $posts;
@@ -18,8 +18,8 @@ class blogManager extends MainManager
         $req->closeCursor();
 
         foreach ($mesPosts as $post) {
-            $mesPosts = new Blog($post['id'],  $post['title'],$post['author'], $post['content'], $post['image'],$post['created_at']);
-            $this->ajoutPost($mesPosts);
+            $posts = new Blog($post['id'],  $post['title'], $post['author'], $post['content'], $post['image'], $post['created_at']);
+            $this->ajoutPost($posts);
         }
     }
 
@@ -44,26 +44,27 @@ class blogManager extends MainManager
         }
     }
 
-    public function ajoutPostBd( $id,$title,$author,$content,$image,$created_at)
+    
+
+    public function ajoutPostBd($title, $author, $content, $created_at, $image)
     {
-       
-        $req = "INSERT INTO posts (id,author,title,content,image,created_at)
-    values (:id,:author,:title,:content,:image,:created_at )";
+
+        $req = "INSERT INTO posts (title,author,content,image,created_at)
+    values (:title,:author,:content,:image,: NOW() )";
         $stmt = $this->getBdd()->prepare($req);
-        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
-        $stmt->bindValue(":author", $author, PDO::PARAM_STR);
+
+
         $stmt->bindValue(":title", $title, PDO::PARAM_STR);
+        $stmt->bindValue(":author", $author, PDO::PARAM_STR);
         $stmt->bindValue(":content", $content, PDO::PARAM_STR);
         $stmt->bindValue(":image", $image, PDO::PARAM_STR);
-        $stmt->bindValue(":created_at", $created_at, PDO::PARAM_STR);
         $resultat = $stmt->execute();
         $stmt->closeCursor();
 
         if ($resultat > 0) {
-            $post = new Blog($this->getBdd()->lastInsertId(), $title, $author,$content,$image,$created_at);
+            $post = new Blog($this->getBdd()->lastInsertId(), $title, $author, $content, localtime(), $image);
             $this->ajoutPost($post);
         }
-    
     }
 
 
@@ -77,37 +78,34 @@ class blogManager extends MainManager
         $stmt->closeCursor();
 
         if ($resultat > 0) {
-            $livre = $this->getPostById($id);
-            unset($livre);
+            $post = $this->getPostById($id);
+            unset($post);
         }
     }
 
-    public function modificationPostBD( $id,$author,$title,$content,$image,$created_at)
+    public function modificationPostBD($id, $author, $title, $content, $created_at, $image)
     {
-        $req = 'update posts 
-    title = :title, author = :author, content = content, image = :image, created_at = :created_at 
+       
+        $req = 'update posts
+        SET author = :author,title = :title, content = :content,created_at = :created_at,image = :image 
     where id = :id';
 
         $stmt = $this->getBdd()->prepare($req);
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
-        $stmt->bindValue(":title", $title, PDO::PARAM_STR);
         $stmt->bindValue(":author", $author, PDO::PARAM_STR);
+        $stmt->bindValue(":title", $title, PDO::PARAM_STR);
         $stmt->bindValue(":content", $content, PDO::PARAM_STR);
+        $stmt->bindValue(":created_at", $created_at, PDO::PARAM_STR);
         $stmt->bindValue(":image", $image, PDO::PARAM_STR);
-        $stmt->bindValue(":created_at", $created_at, PDO::PARAM_INT);
         $resultat = $stmt->execute();
         $stmt->closeCursor();
 
-        if($resultat > 0) {
+        if ($resultat > 0) {
             $this->getPostById($id)->setTitle($title);
             $this->getPostById($id)->setAuthor($author);
             $this->getPostById($id)->setContent($content);
             $this->getPostById($id)->setImage($image);
             $this->getPostById($id)->setCreated_at($created_at);
-           
         }
     }
-
 }
-
-

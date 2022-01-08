@@ -2,10 +2,13 @@
 require_once "models/Blog/blogManager.model.php";
 require_once "./controllers/MainController.controller.php";
 
+
+
 class BlogController extends MainController
 {
 
     private $blogManager;
+    private $Comments;
 
 
 
@@ -13,6 +16,7 @@ class BlogController extends MainController
     {
         $this->blogManager = new BlogManager;
         $this->blogManager->chargementBlogs();
+        $this->Comments = new CommentController();
     }
 
     public function afficherBlog()
@@ -35,17 +39,12 @@ class BlogController extends MainController
             "page_description" => "Affichage d'un article",
             "page_title" => "Affichage d'un article",
             "post"=>$post,
+            "comment" => $this->Comments->afficherComment($id),
             "view" => "views/Blog/afficherUnPost.view.php",
             "template" => "views/common/template.php"
         ];
         $this->genererPage($data_page);
     }
-
-    public function ajoutPosts($id, $author, $content, $image, $created_at)
-    {
-        $this->tchatManager->ajoutTchatdb($id, $author, $content, $image, $created_at);
-    }
-
 
     public function ajoutPost()
     {
@@ -67,7 +66,7 @@ class BlogController extends MainController
         $file = $_FILES['image'];
         $repertoire = "public/Assets/images/blog/";
         $nomImageAjoute = $this->ajoutImage($file, $repertoire);
-        $this->blogManager->ajoutPostBd($_POST['id'],$_POST['author'],$_POST['title'], $_POST['content'], $_POST['created_at'], $nomImageAjoute);
+        $this->blogManager->ajoutPostBd($_POST['title'],$_POST['author'], $_POST['content'], $_POST['created_at'], $nomImageAjoute);
 
         header('Location: ' . URL . "blog");
     } 

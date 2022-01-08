@@ -1,5 +1,5 @@
 <div>
-    <h1 class="rounded border border-dark p-2 m-2 text-center text-white bg-success">BIENVENUE DANS LE BLOG</h1>
+    <h1 class="rounded border border-dark p-2 m-2 text-center text-white bg-success">Welcome to the blog</h1>
 
     <br>
 
@@ -11,7 +11,7 @@
 
 
 
-    <TITLE>Le blog</TITLE>
+    <TITLE>The blog</TITLE>
 
 
     <table class="table text-center">
@@ -36,16 +36,16 @@
             <td class="align-middle"><a href="<?= URL ?>blog/afficherUnPost/<?= $posts[$i]->getId(); ?>"><?= $posts[$i]->getTitle(); ?></a></td>
             <td class="align-middle"><?=$posts[$i]->getAuthor();?></td>
             <td class="align-middle"><?=$posts[$i]->getCreated_at();?></td>
-            <td class="align-middle"><a href="<?= URL ?>blog/modify/<?= $posts[$i]->getId(); ?>" class="btn btn-warning">Editer</a></td>
+            <td class="align-middle"><a href="<?= URL ?>blog/modify/<?= $posts[$i]->getId(); ?>" class="btn btn-warning">Edit</a></td>
             <td class="align-middle">
                 <form method="POST" action="<?= URL ?>blog/delete/<?= $posts[$i]->getId(); ?>" onSubmit="return confirm('Voulez-vous vraiment supprimer le livre ?');">
-             <button class = "btn btn-danger" type="submit">Supprimer</button> 
+             <button class = "btn btn-danger" type="submit">Delete</button> 
         </form></td>
            
         </tr>
         <?php endfor; ?>
  </table>
 
- <a href="<?= URL ?>blog/add" class="btn btn-success d-block">Ajouter</a>
+ <a href="<?= URL ?>blog/add" class="btn btn-success d-block">Add post</a>
 
         
