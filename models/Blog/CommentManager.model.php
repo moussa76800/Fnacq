@@ -29,20 +29,21 @@ class CommentManager extends MainManager
 
 
 
-     public function getComment($id)
-     {
-         $comment = $this->comments;
-         for ($i = 0; $i < count($comment); $i++) {
-             if ($comment[$i]->getArticleId() == $id) {
-               $commentId[] = $comment[$i];
-           }
-           if (isset($commentId)) {
-               return $commentId;
-           } else {
-               return null;
-           }
+    public function getComment($id)
+    {
+        $comment = $this->comments;
+        for ($i = 0; $i < count($comment); $i++) {
+            if ($comment[$i]->getArticleId() === $id) {
+                $commentId[] = $comment[$i];
+            }
+        }
+        if (isset($commentId)) {
+            return $commentId;
+        } else {
+            return null;
         }
     }
+
     //  public function getCommentById($id)
     //  {
     //      for ($i = 0; $i < count($this->comments); $i++) {
@@ -51,9 +52,10 @@ class CommentManager extends MainManager
     //          }
     //      }
     //  }
-     public function preview ($id){
-        if ($this->blogManager->getCommentById($id)){
-        } 
+    public function preview($id)
+    {
+        if ($this->blogManager->getCommentById($id)) {
+        }
     }
 
 

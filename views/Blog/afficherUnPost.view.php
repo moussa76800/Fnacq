@@ -15,7 +15,6 @@
 </div>
 
 
-
 <div style="background: white; box-shadow: 0 5px 15px rgba(0, 0, 0, .15); padding: 5px 10px; border-radius: 10px; margin-top: 20px">
 
     <h3><b>React to this publication :</b></h3>
@@ -33,14 +32,12 @@
         </div> -->
         <br>
         <div class="form-group" style="font-weight: bold">
-        <label for="message">Comment :</label>
+            <label for="message">Comment :</label>
             <textarea class="form-control" name="comment" rows="4" placeholder="Écrivez-votre commentaire ..."></textarea>
         </div>
         <div>
-
             <input type="hidden" name="idPost" value="<?php echo $post->getId(); ?>">
         </div>
-
         <div>
             <button type="reset" class="btn btn-primary" style="font-weight: bold">Reset form</button>
             <button name="submit" class="btn btn-primary" style="font-weight: bold">Publish</button>
@@ -57,7 +54,7 @@
 
 
     <?php
-     
+
     for ($i = 0; $i < count($comment); $i++) : ?>
         <div style="background: #eee; margin-top: 20px; padding: 5px 10px; border-radius: 10px">
 
@@ -66,7 +63,7 @@
             <div style="text-align: right; font-size: 12px; color: #665">Created_at<?= $comment[$i]->getCreated_at(); ?></div>
         </div>
     <?php endfor;
-     ?>
+    ?>
 
 
 </div>

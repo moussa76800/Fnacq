@@ -14,7 +14,6 @@ require_once("./controllers/Hifi/HifiController.controller.php");
 require_once("./controllers/Tchat/TchatsControllers.controller.php");
 require_once("./controllers/Blog/blogController.controller.php");
 require_once("./controllers/Administrateur/AdministrateurController.controller.php");
-require_once("./controllers/Blog/commentController.controller.php");
 
 
 
@@ -27,7 +26,6 @@ $hifiController = new HifiController();
 $tchatController = new TchatsControllers();
 $blogController = new BlogController();
 $administrateurController = new AdministrateurController();
-$commentController = new CommentController();
 
 
 try {
@@ -56,6 +54,9 @@ try {
                 $livreController->afficherLivres();
             } else if ($url[1] === "display") {
                 $livreController->afficherUnLivre($url[2]);
+            }else if ($url[1] === "buy"){
+              $livreController->buyLivre($url[2]);  
+            
             } else if (Securite::estAdministrateur()) {
 
                 if ($url[1] === "modify") {
@@ -164,17 +165,20 @@ try {
                     $blogController->suppressionPost($url[2]);
                     Toolbox::ajouterMessageAlerte("L'article à bien été supprimer !!", Toolbox::COULEUR_VERTE);
                 }
-            } else if (Securite::estConnecte() && Securite::estAdministrateur()) {
-                if ($url[1] === "validationAjoutComment" && !empty($_POST['comment'])) {
+            } else if (Securite::estConnecte() || Securite::estAdministrateur()) {
+                if ($url[1] === "validationAjoutComment") {
                         /* !empty($_POST['author']) && */
                         /* $author = Securite::secureHTML($_POST['author']); */
+                        
+                        if (!empty($_POST['comment'])) {
                         $comment = Securite::secureHTML($_POST['comment']);
                         $commentController->ajoutCommentValidation($_SESSION['profil']['login'], $comment, $_POST['idPost']);
                         Toolbox::ajouterMessageAlerte("votre message est enregistré.", Toolbox::COULEUR_VERTE);
                         $commentController->afficherComment($id);
                         header("Location: ". URL . "blog/afficherUnPost/" . $_POST['idPost']);
+                        }
+                        
                     } else {
-                        $commentController->afficherComment($id);
                         Toolbox::ajouterMessageAlerte("Cette rubrique n'éxiste pas !!", Toolbox::COULEUR_ROUGE);
                         header("Location: " . URL . "inscription"); 
             } 

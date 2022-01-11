@@ -1,5 +1,6 @@
 <?php
 require_once "models/Blog/blogManager.model.php";
+require_once "models/Blog/commentManager.model.php";
 require_once "./controllers/MainController.controller.php";
 
 
@@ -16,7 +17,8 @@ class BlogController extends MainController
     {
         $this->blogManager = new BlogManager;
         $this->blogManager->chargementBlogs();
-        $this->Comments = new CommentController();
+        $this->Comments = new CommentManager();
+        $this->Comments->chargementComments();
     }
 
     public function afficherBlog()
@@ -35,11 +37,12 @@ class BlogController extends MainController
     public function afficherUnPost($id)
     {
         $post = $this->blogManager->getPostById($id);
+        $comment = $this->Comments->getComment($id);
         $data_page = [
             "page_description" => "Affichage d'un article",
             "page_title" => "Affichage d'un article",
             "post"=>$post,
-            "comment" => $this->Comments->afficherComment($id),
+            "comment" => $comment,
             "view" => "views/Blog/afficherUnPost.view.php",
             "template" => "views/common/template.php"
         ];
