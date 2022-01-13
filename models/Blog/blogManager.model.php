@@ -44,7 +44,7 @@ class BlogManager extends MainManager
         }
     }
 
-    
+
 
     public function ajoutPostBd($title, $author, $content, $created_at, $image)
     {
@@ -85,7 +85,7 @@ class BlogManager extends MainManager
 
     public function modificationPostBD($id, $author, $title, $content, $created_at, $image)
     {
-       
+
         $req = 'update posts
         SET author = :author,title = :title, content = :content,created_at = :created_at,image = :image 
     where id = :id';
@@ -106,6 +106,18 @@ class BlogManager extends MainManager
             $this->getPostById($id)->setContent($content);
             $this->getPostById($id)->setImage($image);
             $this->getPostById($id)->setCreated_at($created_at);
+        }
+    }
+
+    public function findBlogDb($author, $title)
+    {
+
+        $req =  "SELECT  `id`, `title`,`author`, `content`,`image`, `created_at` FROM `posts` WHERE title LIKE '%title%'";
+        $stmt = $this->getBdd()->prepare($req);
+        $resultat = $stmt->execute();
+        $stmt->closeCursor();
+        if ($resultat > 0) {
+           return  $resultat;
         }
     }
 }

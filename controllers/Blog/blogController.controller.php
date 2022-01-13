@@ -9,7 +9,7 @@ class BlogController extends MainController
 {
 
     private $blogManager;
-    private $Comments;
+    private $commentManager;
 
 
 
@@ -17,8 +17,8 @@ class BlogController extends MainController
     {
         $this->blogManager = new BlogManager;
         $this->blogManager->chargementBlogs();
-        $this->Comments = new CommentManager();
-        $this->Comments->chargementComments();
+        $this->commentManager = new CommentManager();
+        $this->commentManager->chargementComments();
     }
 
     public function afficherBlog()
@@ -37,7 +37,7 @@ class BlogController extends MainController
     public function afficherUnPost($id)
     {
         $post = $this->blogManager->getPostById($id);
-        $comment = $this->Comments->getComment($id);
+        $comment = $this->commentManager->getComment($id);
         $data_page = [
             "page_description" => "Affichage d'un article",
             "page_title" => "Affichage d'un article",
@@ -105,11 +105,16 @@ class BlogController extends MainController
     {
         $nomImage = $this->blogManager->getPostById($id)->getImage();
         unlink("public/Assets/images/blog/" . $nomImage);
-        $this->blogManager->suppressionPostBD($id);
-
-        
+        $this->blogManager->suppressionPostBD($id);  
         header('Location: ' . URL . "blog");
     }
+
+
+    public function findBlog($author,$title){
+        $this->blogManager->findBlogDb($author, $title); 
+        header('Location: ' . URL . "blog");  
+    } 
+    
 
 
 

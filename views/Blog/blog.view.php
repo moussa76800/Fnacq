@@ -3,10 +3,13 @@
 
     <br>
 
+    <form method="POST" action="<?=URL ?>blog">
     <div class="input-group">
-        <input type="search" class="form-control rounded text-center" height="50px" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-        <button type="button" class="btn btn-outline-primary">search</button>
+        <input type="search"   class="form-control rounded text-center" height="50px" placeholder="Search the title of post" aria-label="Search" aria-describedby="search-addon" />
+       
+        <input type ="submit" class="btn btn-outline-primary"  name="find" />
     </div>
+    </form>
     <br>
 
 

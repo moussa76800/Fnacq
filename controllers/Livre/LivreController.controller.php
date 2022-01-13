@@ -45,7 +45,17 @@ class LivreController extends MainController
         $this->genererPage($data_page);
     }
     
-
+    public function buyLivre($id){
+        $livre = $this->livreManager->getLivreById($id);
+        $data_page = [
+            "page_description" => "Panier",
+            "page_title" => "Panier",
+            "livre"=>$livre,
+            "view" => "views/Livre/panierLivre.view.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->genererPage($data_page);
+    }
 
     public function ajoutLivre()
     {
@@ -126,19 +136,7 @@ class LivreController extends MainController
         $this->genererPage($data_page);
     }
 
-    public function buyLivre($id){
-        $livre = $this->livreManager->getLivreById($id);
-        $data_page = [
-            "page_description" => "Panier",
-            "page_title" => "Panier",
-            "livre"=>$livre,
-            "view" => "views/Livre/panierLivre.view.php",
-            "template" => "views/common/template.php"
-        ];
-        $this->genererPage($data_page);
-    }
-      
-
+    
 
     public function modifLivreValidation()
     {

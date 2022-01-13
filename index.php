@@ -14,7 +14,7 @@ require_once("./controllers/Hifi/HifiController.controller.php");
 require_once("./controllers/Tchat/TchatsControllers.controller.php");
 require_once("./controllers/Blog/blogController.controller.php");
 require_once("./controllers/Administrateur/AdministrateurController.controller.php");
-
+require_once("./controllers/Blog/CommentController.controller.php");
 
 
 
@@ -26,7 +26,7 @@ $hifiController = new HifiController();
 $tchatController = new TchatsControllers();
 $blogController = new BlogController();
 $administrateurController = new AdministrateurController();
-
+$commentController = new CommentController();
 
 try {
     if (empty($_GET['page'])) {
@@ -54,9 +54,8 @@ try {
                 $livreController->afficherLivres();
             } else if ($url[1] === "display") {
                 $livreController->afficherUnLivre($url[2]);
-            }else if ($url[1] === "buy"){
-              $livreController->buyLivre($url[2]);  
-            
+            } else if ($url[1] === "buy") {
+                $livreController->buyLivre($url[2]);
             } else if (Securite::estAdministrateur()) {
 
                 if ($url[1] === "modify") {
@@ -147,6 +146,31 @@ try {
                 $blogController->afficherBlog();
             } else if ($url[1] === "afficherUnPost") {
                 $blogController->afficherUnPost($url[2]);
+            } else if (Securite::estConnecte()) {
+                if ($url[1] === "validationAjoutComment") {
+                    if (!empty($_POST['comment'])) {
+                        $comment = Securite::secureHTML($_POST['comment']);
+                        $commentController->ajoutCommentValidation($_SESSION['profil']['login'], $comment, $_POST['idPost']);
+                        Toolbox::ajouterMessageAlerte("Votre message est enregistré.", Toolbox::COULEUR_VERTE);
+                        $commentController->afficherComment($id);
+                        header("Location: " . URL . "blog/afficherUnPost/" . $_POST['idPost']);
+                    } else {
+                        Toolbox::ajouterMessageAlerte("Votre message n'est pas enregistré.", Toolbox::COULEUR_ROUGE);
+                        header("Location: " . URL . "blog/afficherUnPost/" . $_POST['idPost']);
+                    }
+                } else {
+                    Toolbox::ajouterMessageAlerte("Vous n'avez pas accès à ces services !! .", Toolbox::COULEUR_ROUGE);
+                    header('Location: ' . URL . "accueil");
+                }
+            } else if (isset($_POST['find'])) {
+                if (!Securite::estConnecte()) {
+                    Toolbox::ajouterMessageAlerte("Veuillez-vous connecter ou vous inscrire pour intéragir dans le BLOG !!!", Toolbox::COULEUR_ROUGE);
+                    $blogController->afficherBlog();
+                } else {
+                    $blogController->findBlog($author, $title);
+                    Toolbox::ajouterMessageAlerte("Voici,l'affichage de votre recherche.", Toolbox::COULEUR_VERTE);
+                    $blogController->afficherBlog();
+                }
             } else if (Securite::estAdministrateur()) {
                 if ($url[1] === "modify") {
                     $blogController->modificationPost($url[2]);
@@ -165,24 +189,7 @@ try {
                     $blogController->suppressionPost($url[2]);
                     Toolbox::ajouterMessageAlerte("L'article à bien été supprimer !!", Toolbox::COULEUR_VERTE);
                 }
-            } else if (Securite::estConnecte() || Securite::estAdministrateur()) {
-                if ($url[1] === "validationAjoutComment") {
-                        /* !empty($_POST['author']) && */
-                        /* $author = Securite::secureHTML($_POST['author']); */
-                        
-                        if (!empty($_POST['comment'])) {
-                        $comment = Securite::secureHTML($_POST['comment']);
-                        $commentController->ajoutCommentValidation($_SESSION['profil']['login'], $comment, $_POST['idPost']);
-                        Toolbox::ajouterMessageAlerte("votre message est enregistré.", Toolbox::COULEUR_VERTE);
-                        $commentController->afficherComment($id);
-                        header("Location: ". URL . "blog/afficherUnPost/" . $_POST['idPost']);
-                        }
-                        
-                    } else {
-                        Toolbox::ajouterMessageAlerte("Cette rubrique n'éxiste pas !!", Toolbox::COULEUR_ROUGE);
-                        header("Location: " . URL . "inscription"); 
-            } 
-        }else {
+            } else {
                 Toolbox::ajouterMessageAlerte("Vous ne pouvez pas accéder à ces options car vous n'êtes pas l'administrateur !!", Toolbox::COULEUR_ROUGE);
                 header('Location: ' . URL . "accueil");
             }

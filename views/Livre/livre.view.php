@@ -29,7 +29,7 @@
             <td class="align-middle">
                 <form method="POST" action="<?= URL ?>livres/delete/<?= $livres[$i]->getId(); ?>" onSubmit="return confirm('Voulez-vous vraiment supprimer le livre ?');">
              <button class = "btn btn-danger" type="submit">Delete</button>
-             <td class="align-middle"><a href="<?= URL ?>livres/buy/<?= $livres[$i]->getId(); ?>" class="btn btn-info">Acheter</a></td>
+             <td class="align-middle"><a href="<?= URL ?>livres/buy/<?= $livres[$i]->getId(); ?>" class="btn btn-info">Buy</a></td>
         </form></td>
            
         </tr>
