@@ -24,9 +24,6 @@ table tr th {
 
 
 
-
-
-
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 <div class="container bootstrap snippets bootdey">
     <div class="col-md-9 col-sm-8 content">
@@ -42,8 +39,8 @@ table tr th {
                 <div class="panel panel-info panel-shadow">
                     <div class="panel-heading">
                         <h3>
-                           <!--  <img class="img-circle img-thumbnail" src="<?= URL; ?>public/Assets/images/<?= $utilisateur['image'] ?>" width="100px" alt="photo de profil">
-							<?= $utilisateur['login'] ?> -->
+                          <!-- <img class="img-circle img-thumbnail" src="<?= URL; ?>public/Assets/images/<?= $utilisateur['image'] ?>" width="100px" alt="photo de profil">
+							<?= $utilisateur['login'] ?>  -->
                         </h3>
                     </div>
                     <div class="panel-body"> 

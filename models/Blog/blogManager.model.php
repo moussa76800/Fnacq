@@ -109,15 +109,26 @@ class BlogManager extends MainManager
         }
     }
 
-    public function findBlogDb($author, $title)
+
+
+     public function getPostByTitle($title)
+    {
+        for ($i = 0; $i < count($this->posts); $i++) {
+            if ($this->posts[$i]->getTitle() === $title) {
+                return $this->posts[$i];
+            }
+        }
+    } 
+     /* public function findBlogDb($title)
     {
 
-        $req =  "SELECT  `id`, `title`,`author`, `content`,`image`, `created_at` FROM `posts` WHERE title LIKE '%title%'";
+        $req =  "SELECT  `id`, `title`,`author`, `content`,`image`, `created_at` FROM `posts` WHERE `title` LIKE '%title%'";
         $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":title", $title, PDO::PARAM_STR);
         $resultat = $stmt->execute();
         $stmt->closeCursor();
         if ($resultat > 0) {
            return  $resultat;
         }
-    }
+    }  */
 }

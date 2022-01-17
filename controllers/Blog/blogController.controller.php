@@ -34,6 +34,18 @@ class BlogController extends MainController
         $this->genererPage($data_page);
     }
 
+
+    public function findTitle($title)
+    {
+        $findTitlePost= $this->blogManager->getPostByTitle($title);
+        $data_page = [
+            "findTitlePost"=> $findTitlePost,
+            "view" => "views/Blog/blog.view.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->genererPage($data_page);
+    }
+
     public function afficherUnPost($id)
     {
         $post = $this->blogManager->getPostById($id);
@@ -110,11 +122,13 @@ class BlogController extends MainController
     }
 
 
-    public function findBlog($author,$title){
-        $this->blogManager->findBlogDb($author, $title); 
-        header('Location: ' . URL . "blog");  
-    } 
     
+    
+
+   /*  public function findBlog($title){
+        $this->blogManager->findBlogDb($title); 
+        header('Location: ' . URL . "blog");  
+    }  */
 
 
 
