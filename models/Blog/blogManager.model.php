@@ -114,9 +114,14 @@ class BlogManager extends MainManager
      public function getPostByTitle($title)
     {
         for ($i = 0; $i < count($this->posts); $i++) {
-            if ($this->posts[$i]->getTitle() === $title) {
-                return $this->posts[$i];
+            if ( strpos(strtolower($this->posts[$i]->getTitle()), strtolower($title)) !== false) {
+                $ArrayPost[] = $this->posts[$i];
             }
+        }
+        if (isset($ArrayPost)) {
+            return $ArrayPost;
+        }else {
+            return null;
         }
     } 
      /* public function findBlogDb($title)

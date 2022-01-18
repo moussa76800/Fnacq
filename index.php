@@ -143,7 +143,11 @@ try {
 
         case "blog":
             if (empty($url[1])) {
-                $blogController->afficherBlog();
+                if (isset($_POST['findPost'])) {
+                    $blogController->findTitle($_POST['findPost']);
+                }else {
+                    $blogController->afficherBlog();
+                }
             } else if ($url[1] === "afficherUnPost") {
                 $blogController->afficherUnPost($url[2]);
             } else if ($url[1] === "validationAjoutComment") {
@@ -161,15 +165,6 @@ try {
                 } else {
                     Toolbox::ajouterMessageAlerte("Vous n'avez pas accès à ces services !! .", Toolbox::COULEUR_ROUGE);
                     header('Location: ' . URL . "accueil");
-                }
-            } else if (isset($_POST['submit'])) {
-                if (Securite::estConnecte()) {
-                      $blogController->findTitle($url[2]);
-                    Toolbox::ajouterMessageAlerte("Voici,l'affichage de votre recherche.", Toolbox::COULEUR_VERTE);
-                    $blogController->afficherBlog(); 
-                } else {
-                    Toolbox::ajouterMessageAlerte("Veuillez-vous connecter ou vous inscrire pour intéragir dans le BLOG !!!", Toolbox::COULEUR_ROUGE);
-                    $blogController->afficherBlog();
                 }
             } else if (!Securite::estUtilisateur() && Securite::estAdministrateur()) {
                 if ($url[1] === "modify") {

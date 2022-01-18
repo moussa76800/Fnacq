@@ -34,12 +34,13 @@ class BlogController extends MainController
         $this->genererPage($data_page);
     }
 
-
     public function findTitle($title)
     {
-        $findTitlePost= $this->blogManager->getPostByTitle($title);
+        $posts = $this->blogManager->getPostByTitle($title);
         $data_page = [
-            "findTitlePost"=> $findTitlePost,
+            "page_description" => "Page du Blog",
+            "page_title" => "Page du Blog",
+            "posts" => $posts,
             "view" => "views/Blog/blog.view.php",
             "template" => "views/common/template.php"
         ];

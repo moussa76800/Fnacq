@@ -3,25 +3,13 @@
 
     <br>
 
-    <form method="POST" action="<?= URL ?>blog/SearchPostWithTitle">
+    <form method="POST" action="<?= URL ?>blog">
         <div class="input-group">
             <input type="search" class="form-control rounded text-center" name="findPost" height="50px" placeholder="Search the title of post" aria-label="Search" aria-describedby="search-addon" />
             <button name="submit" class="btn btn-primary"  style="font-weight: bold">Search</button>
             
         </div>
     </form>
-
-    <div id="resultats">
-        <div id="nbr">2 résultats</div>
-        <ol>
-            <li>Résultats 1</li>
-        </ol>
-    </div>
-    <br>
-    <?php for ($i = 0; $i < count($findTitlePost); $i++) : ?>
-        <td class="align-middle"><?= $findTitlePost[$i]->getTitle(); ?></td>
-        <?php endfor; ?>
-
         <br>
     <TITLE>The blog</TITLE>
 
