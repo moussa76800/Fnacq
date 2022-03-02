@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\models",
+    "\\models\\Livre",
+    "\\views",
+    "\\views\\common",
+    "\\views\\Livre",
+    "\\views\\Materiel-Hifi",
+    "\\views\\Utilisateur"
+  ],
+  "SelectedNode": "\\models\\Livre\\Livre.class.php",
+  "PreviewInSolutionExplorer": false
+}

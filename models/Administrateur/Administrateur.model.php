@@ -2,6 +2,7 @@
 require_once("./models/MainManager.model.php");
 
 class AdministrateurManager extends MainManager{
+    
     public function getUtilisateurs(){
         $req = $this->getBdd()->prepare("SELECT * FROM utilisateur");
         $req->execute();
@@ -21,4 +22,35 @@ class AdministrateurManager extends MainManager{
         $stmt->closeCursor();
         return $estModifier;
     }
+
+
+public function getCommentForUser($author){
+    
+   $req ="SELECT `author`, `comment`, `created_at` FROM `comments` WHERE author=:author Limit 0,5 ";
+    $stmt = $this->getBdd()->prepare($req);
+    $stmt->bindValue(":author", $author, PDO::PARAM_STR);
+    $stmt->execute();
+    $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $resultat; 
+    
 }
+
+public function getUtilisateurByLogin($login){
+    $req = $this->getBdd()->prepare("SELECT * FROM `utilisateur` WHERE `login`= '$login'");
+        $req->execute();
+        $datas = $req->fetchAll(PDO::FETCH_ASSOC);
+        $req->closeCursor();
+        return $datas;
+}
+
+}
+
+   
+
+
+
+   
+
+
+    

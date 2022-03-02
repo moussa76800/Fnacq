@@ -54,8 +54,13 @@ try {
                 $livreController->afficherLivres();
             } else if ($url[1] === "display") {
                 $livreController->afficherUnLivre($url[2]);
-            } else if ($url[1] === "buy") {
-                $livreController->buyLivre($url[2]);
+            } else if (Securite::estUtilisateur()) {
+                if ($url[1] === "buy") {
+                    $livreController->buyLivre($url[2]);
+                }
+                if ($url[1] === "continueShop")
+                    $livreController->panierLivre($url[2]);
+                
             } else if (Securite::estAdministrateur()) {
 
                 if ($url[1] === "modify") {
@@ -81,6 +86,8 @@ try {
             }
 
             break;
+            case "panier":
+                break;
 
         case "login":
             $visiteurController->login();
@@ -145,7 +152,7 @@ try {
             if (empty($url[1])) {
                 if (isset($_POST['findPost'])) {
                     $blogController->findTitle($_POST['findPost']);
-                }else {
+                } else {
                     $blogController->afficherBlog();
                 }
             } else if ($url[1] === "afficherUnPost") {
@@ -269,8 +276,19 @@ try {
                         break;
                     case "validation_modificationRole":
                         $administrateurController->validation_modificationRole($_POST['login'], $_POST['role'], $_POST['est_valide']);
-
                         break;
+                    case "showProfilUser":
+                        $administrateurController->showProfilUser($url[2]);
+                        header("Location: " . URL . "showProfilUser.view.php");
+                        break;
+                        case "showCommentUser":
+                            $administrateurController->showCommentUser($url[2]);
+                            header("Location: " . URL . "showCommentUser.view.php");
+                            break;
+                            case "showConnectionUser":
+                                $administrateurController->showConnexionUser($url[2]);
+                                header("Location: " . URL . "showConnexionUser.view.php");
+                                break;
                     default:
                         throw new Exception("La page n'existe pas");
                 }

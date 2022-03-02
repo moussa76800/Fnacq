@@ -1,4 +1,5 @@
-<?php
+ <?php
+
 
 require_once "./controllers/MainController.controller.php";
 require_once "./models/Utilisateur/UtilisateurModel.model.php";
@@ -25,6 +26,8 @@ class UtilisateurController extends MainController
                 Toolbox::ajouterMessageAlerte("Bon retour sur le site " . $login . " !", Toolbox::COULEUR_VERTE);
                 $_SESSION['profil'] = ["login" => $login];
                 header("Location: " . URL . "compte/profil");
+               
+               
             } else {
                 $msg = "Le compte " . $login . " n'a pas été activé par mail !!";
                 $msg .= "<a href='renvoyerMailValidaton/" . $login . "'>Renvoyez le mail de validation</a>";

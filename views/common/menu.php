@@ -17,6 +17,7 @@
             <li><a class="dropdown-item" href="<?= URL ?>livres">Livres</a></li>
             <li><a class="dropdown-item" href="<?= URL ?>materielsInformatiques">Matériels Informatiques</a></li>
             <li><a class="dropdown-item" href="<?= URL ?>materielsHifi">Matériels Hifi</a></li>
+            <li><a class="dropdown-item" href="<?= URL ?>panier">Panier</a></li>
           </ul>
         </li>
 
@@ -56,7 +57,7 @@
             <li><a class="dropdown-item" href="<?= URL ?>administration/droits">Editer des nouveaux commentaires</a></li>
             <li><a class="dropdown-item" href="<?= URL ?>administration/droits">Consulter le nombre de connexions d'un UM</a></li>
             <li><a class="dropdown-item" href="<?= URL ?>administration/droits">Consulter la liste des achats effectués par un UM</a></li>
-            <li><a class="dropdown-item" href="<?= URL ?>administration/droits">Consulter les 5 derniers commentaires d'un UM</a></li>
+            <li><a class="dropdown-item" href="<?= URL ?>administration/showBlogUser">Consulter les 5 derniers commentaires d'un UM</a></li>
            
           </ul>
         </li>

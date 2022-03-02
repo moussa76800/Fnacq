@@ -1,3 +1,27 @@
+
+Total Hits:
+<?
+
+
+$filename = "hit_counter.txt";
+@$fptr = fopen($filename, "r+");
+
+if ($fptr == NULL) {
+    @$fptr = fopen($filename, "w+");
+    fwrite($fptr, "1");
+    fclose($fptr);
+    echo "1";
+}
+else {
+    $data = fread($fptr, filesize($filename));
+    $dataInt = (int) $data;
+    $dataInt++;
+    rewind($fptr);
+    fwrite($fptr, $dataInt);
+    fclose($fptr);
+    echo $dataInt;
+}
+?>
 <h1 class="rounded border border-dark p-2 m-2 text-center text-white bg-success">PAGE DE CONNEXION</h1>
 <br>
 <br>

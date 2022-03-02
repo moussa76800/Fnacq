@@ -46,15 +46,19 @@ class LivreController extends MainController
     }
     
     public function buyLivre($id){
-        $livre = $this->livreManager->getLivreById($id);
+        $livree = $this->livreManager->getLivreById($id);
         $data_page = [
             "page_description" => "Panier",
             "page_title" => "Panier",
-            "livre"=>$livre,
-            "view" => "views/Livre/panierLivre.view.php",
+            "livree"=>$livree,
+            "view" => "views/Livre/addPanierLivre.view.php",
             "template" => "views/common/template.php"
         ];
         $this->genererPage($data_page);
+    }
+
+    public function panierLivre($id){
+        
     }
 
     public function ajoutLivre()

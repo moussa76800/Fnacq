@@ -23,7 +23,7 @@ class Securite
 
     public static function estAdministrateur()
     {
-        return (!empty($_SESSION['profil']['role']=="administrateur"));
+        return (!empty($_SESSION['profil']['role']==="administrateur"));
     }
 
     public static function utilisateurIndesirable()
