@@ -1,0 +1,21 @@
+object(Livre)#74 (6) { 
+    ["id":"Livre":private]=> string(1) "1" 
+    ["title":"Livre":private]=> string(24) "Algorithmes selon H2PROG" 
+    ["authors":"Livre":private]=> string(6) "H2PROG" 
+    ["numbersOfPages":"Livre":private]=> string(3) "300" 
+    ["price":"Livre":private]=> string(2) "48" 
+    ["image":"Livre":private]=> string(8) "algo.png" 
+    } 
+
+array(5) { 
+    ["pomme"]=> string(1) "0" 
+    ["poire"]=> string(1) "0" 
+    ["peche"]=> string(1) "0" 
+    ["banane"]=> string(1) "0" 
+    
+    ["livres"]=> string(74) "a:3:{
+        i:0;s:24:"Algorithmes selon H2PROG";
+        i:1;s:8:"algo.png";
+        i:2;s:2:"48";
+        }" 
+    } 
