@@ -22,7 +22,14 @@
 
 
 <?php
+
+use LDAP\Result;
+
+if (isset($_COOKIE['panier'])){
+
 	$result = unserialize($_COOKIE['panier']['livres']);
+	var_dump($result);
+}
 ?>
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 <div class="container bootstrap snippets bootdey">

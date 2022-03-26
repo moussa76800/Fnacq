@@ -16,10 +16,12 @@ class PanierManager extends  MainManager{
     }
 
 public function addLivre($id,$quantity){
+
     $livre = $this->livres->addPanierLivre($id);
     $valeur = array($livre->getTitle(),$livre->getImage(),$livre->getPrice(),$quantity);
     $chaine = serialize($valeur);
     setcookie("panier[livres]",$chaine,'','/Fnacq/panier','localhost');
     
 }
+
 }

@@ -2,7 +2,7 @@
 
 require_once "./controllers/MainController.controller.php";
 require_once "./models/Panier/panierManager.model.php";
-
+require_once "./models/Livre/Livre.class.php";
 
 class PanierController extends MainController
 {
@@ -26,7 +26,7 @@ public function afficherPanier(){
 
     
 
-    public function addLivre($id,$quantity)
+    public function addLivres($id,$quantity)
     {
         $this->panierManager->addLivre($id,$quantity);
         

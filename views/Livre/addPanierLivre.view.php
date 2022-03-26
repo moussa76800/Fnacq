@@ -71,7 +71,8 @@
 												<button rel="tooltip" class="btn btn-default"><i class="fa fa-pencil"></i></button>
 												<a href="#" class="btn btn-primary"><i class="fa fa-trash-o"></i></a>
 												<input type="hidden" name="id" value="<?= $livree->getId(); ?>">
-												<input type="submit" value="Acheter">
+												<input type="submit"class="btn btn-primary" value="Acheter">
+												
 											</form>
 										</td>
 										<td><?=number_format(  $livree->getPrice(),2,',',' '); ?> Euros</td>

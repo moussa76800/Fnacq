@@ -56,10 +56,10 @@ try {
                 $livreController->afficherLivres();
             } else if ($url[1] === "display") {
                 $livreController->afficherUnLivre($url[2]);
-            } else if (Securite::estUtilisateur()) {
+            } else if (Securite::estUtilisateur() && !Securite::estAdministrateur()) {
                 if ($url[1] === "buy") {
-                    if (isset($_POST['quantity'])) {
-                        $panierController->addLivre($_POST['id'],$_POST['quantity']);
+                    if (isset($_POST['quantity']) && isset($_POST['id'] )) {
+                        $panierController->addLivres($_POST['id'],$_POST['quantity']);
                         header('Location: ' . URL . "livres");
                     }else {
                         $livreController->buyLivre($url[2]);
