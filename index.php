@@ -28,7 +28,7 @@ $tchatController = new TchatsControllers();
 $blogController = new BlogController();
 $administrateurController = new AdministrateurController();
 $commentController = new CommentController();
-$panierController= new PanierController();
+$panierController = new PanierController();
 
 try {
     if (empty($_GET['page'])) {
@@ -56,17 +56,14 @@ try {
                 $livreController->afficherLivres();
             } else if ($url[1] === "display") {
                 $livreController->afficherUnLivre($url[2]);
-            } else if (Securite::estUtilisateur() && !Securite::estAdministrateur()) {
-                if ($url[1] === "buy") {
-                    if (isset($_POST['quantity']) && isset($_POST['id'] )) {
-                        $panierController->addLivres($_POST['id'],$_POST['quantity']);
-                        header('Location: ' . URL . "livres");
-                    }else {
-                        $livreController->buyLivre($url[2]);
-                    }
+            } else if ($url[1] === "buy" && Securite::estUtilisateur()) {
+                if (isset($_POST['quantity']) && isset($_POST['id'])) {
+                    $panierController->addLivres($_POST['id'], $_POST['quantity']);
+                    header('Location: ' . URL . "livres");
+                } else {
+                    $livreController->buyLivre($url[2]);
                 }
-            }
-                 else if (Securite::estAdministrateur()) {
+            } else if (Securite::estAdministrateur()) {
 
                 if ($url[1] === "modify") {
                     $livreController->modificationLivre($url[2]);
@@ -91,13 +88,13 @@ try {
             }
             break;
 
-            case "panier":
-                if (empty($url[1])) {
-                    $panierController->afficherPanier();
-                }
-            
-        
-                break;
+        case "panier":
+            if (empty($url[1])) {
+                $panierController->afficherPanier();
+            }
+
+
+            break;
 
         case "login":
             $visiteurController->login();
@@ -291,14 +288,18 @@ try {
                         $administrateurController->showProfilUser($url[2]);
                         header("Location: " . URL . "showProfilUser.view.php");
                         break;
-                        case "showCommentUser":
-                            $administrateurController->showCommentUser($url[2]);
-                            header("Location: " . URL . "showCommentUser.view.php");
-                            break;
-                            case "showConnectionUser":
-                                $administrateurController->showConnexionUser($url[2]);
-                                header("Location: " . URL . "showConnexionUser.view.php");
-                                break;
+                    case "showCommentUser":
+                        $administrateurController->showCommentUser($url[2]);
+                        header("Location: " . URL . "showCommentUser.view.php");
+                        break;
+                    case "showConnectionUser":
+                        $administrateurController->showConnexionUser($url[2]);
+                        header("Location: " . URL . "showConnexionUser.view.php");
+                        break;
+                    case "articles":
+                        $administrateurController->afficherLivres();
+                        header("Location: " . URL . "articles.view.php");
+                        break;
                     default:
                         throw new Exception("La page n'existe pas");
                 }

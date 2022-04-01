@@ -1,31 +1,13 @@
 
-<?php
-session_id();
-$filename = "hit_counter.txt";
-@$fptr = fopen($filename, "r+");
-
-if ($fptr == NULL) {
-    @$fptr = fopen($filename, "w+");
-    fwrite($fptr ,$utilisateur['profil']['login'], "1");
-    fclose($fptr);
-    echo "1";
-}
-else {
-    $data = fread($fptr, filesize($filename));
-    $dataInt = (int) $data;
-    $dataInt++;
-    rewind($fptr);
-    fwrite($fptr, $dataInt);
-    fclose($fptr);
-    ?>
-
-    <h2 class="rounded border border-dark p-2 m-2  text-white bg-dark"><?php echo "Connexion's number  : " .$dataInt;
-}?></h2>
 <div class="text-center">
     <h1 class="rounded border border-dark p-2 m-2 text-center text-white bg-success">Bienvenue dans ta page de profil,<?= $utilisateur['login'] ?></h1>
-
+<?php
+require ("./functions/compteur.php");
+ajouter_vue()
+?>
+<h2 class="rounded border border-dark p-2 m-2 text-center ">Nombre de connexion : <?=nb_vues()?>
     <div>
-        <div>
+        <div>            
             
 
             <img src="<?= URL; ?>public/Assets/images/<?= $utilisateur['image'] ?>" width="100px" alt="photo de profil" />

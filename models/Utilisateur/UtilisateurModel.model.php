@@ -94,7 +94,7 @@ class UtilisateurManager extends MainManager
         $stmt->bindValue(":prenom", $prenom, PDO::PARAM_STR);
         $stmt->bindValue(":adresse", $adresse, PDO::PARAM_STR);
         $stmt->bindValue(":code_postal", $code_postal, PDO::PARAM_INT);
-        $stmt->bindValue(":date_de_naissance", $date_de_naissance, PDO::PARAM_INT);
+        $stmt->bindValue(":date_de_naissance", $date_de_naissance, PDO::PARAM_STR);
         $stmt->execute();
         $estModifier = ($stmt->rowCount() > 0);
         $stmt->closeCursor();

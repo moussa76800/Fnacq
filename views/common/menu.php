@@ -18,6 +18,7 @@
             <li><a class="dropdown-item" href="<?= URL ?>materielsInformatiques">Matériels Informatiques</a></li>
             <li><a class="dropdown-item" href="<?= URL ?>materielsHifi">Matériels Hifi</a></li>
             <li><a class="dropdown-item" href="<?= URL ?>panier">Panier</a></li>
+            
           </ul>
         </li>
 
@@ -52,13 +53,11 @@
             Administration 
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="<?= URL ?>administration/droits">Gestion des droits</a></li>
-            <li><a class="dropdown-item" href="<?= URL ?>administration/droits">Participer au mini-chat</a></li>
-            <li><a class="dropdown-item" href="<?= URL ?>administration/droits">Editer des nouveaux commentaires</a></li>
-            <li><a class="dropdown-item" href="<?= URL ?>administration/droits">Consulter le nombre de connexions d'un UM</a></li>
-            <li><a class="dropdown-item" href="<?= URL ?>administration/droits">Consulter la liste des achats effectués par un UM</a></li>
-            <li><a class="dropdown-item" href="<?= URL ?>administration/showBlogUser">Consulter les 5 derniers commentaires d'un UM</a></li>
-           
+            <li><a class="dropdown-item" href="<?= URL ?>administration/droits">Gestion</a></li>
+            <li><a class="dropdown-item" href="<?= URL ?>administration/droits">Nombre de connexions d'un UM</a></li>
+            <li><a class="dropdown-item" href="<?= URL ?>administration/droits">Liste des achats effectués par un UM</a></li>
+            <li><a class="dropdown-item" href="<?= URL ?>administration/articles">Tout les articles</a></li>
+
           </ul>
         </li>
         <?php endif; ?>

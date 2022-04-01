@@ -64,7 +64,7 @@ if (isset($_COOKIE['panier'])){
 <br>
 	<tr>
 		
-		<td class="align-middle"><img src="public/Assets/images/livres/<?php echo $result[1];?>" width="60px;"></td>
+		<td class="align-middle"><img src="public/Assets/images/livres/<?php echo $result['image'];?>" width="60px;"></td>
 		<td class="align-middle"><?php echo $result[0];?></a></td>
 		<td class="align-middle"><?php echo $result[2];?> Euros</td>
 		<td class="align-middle"><?php echo $result[3];?> quantity</td>

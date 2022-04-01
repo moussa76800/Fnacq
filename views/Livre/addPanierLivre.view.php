@@ -68,10 +68,7 @@
 										<td>
 											<form method="POST" class="form-inline">
 												<input class="form-control" name="quantity" type="int" value="1">
-												<button rel="tooltip" class="btn btn-default"><i class="fa fa-pencil"></i></button>
-												<a href="#" class="btn btn-primary"><i class="fa fa-trash-o"></i></a>
-												<input type="hidden" name="id" value="<?= $livree->getId(); ?>">
-												<input type="submit"class="btn btn-primary" value="Acheter">
+												
 												
 											</form>
 										</td>
@@ -96,8 +93,11 @@
 						</div>
 					</div>
 				</div>
+                
 				<a href="<?= URL ?>livres" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span>Continue Shopping</a>
-				<a href="<?= URL ?>panier" class="btn btn-primary pull-right">Panier<span class="glyphicon glyphicon-chevron-right"></span></a>
+				
+                <a href="<?= URL ?>panier" class="btn btn-primary pull-right">Ajouter au panier<span class="glyphicon glyphicon-chevron-right"></span></a>
+
 			</div>
 		</div>
 	</div>

@@ -1,6 +1,47 @@
+<h1 class="rounded border border-dark p-2 m-2 text-center text-white bg-dark">Profil de </h1>
+ </h1>
+   
 
 
-<div class="text-center">
+
+
+<div style="background: white ; box-shadow: 0 5px 15px rgba(0, 0, 0, .15); padding: 5px 10px; border-radius: 10px; margin-top: 20px">
+
+    <table class="table text-center">
+        <tr class="table-info">
+            <th style="font-weight: bold">EMAIL</th>
+            <th style="font-weight: bold">IMAGE</th>
+            <th style="font-weight: bold">NOM</th>
+            <th style="font-weight: bold">PRENOM</th>
+            <th style="font-weight: bold">ADRESSE</th>
+            <th style="font-weight: bold">CODE POSTAL</th>
+            <th style="font-weight: bold">DATE DE NAISSANCE</th>
+        </tr>
+
+
+        <?php
+
+        for ($i = 0; $i < count($profil); $i++) : ?>
+
+
+
+            <tr>
+
+                <td class="align-middle"><?= $profil[$i]['email'] ?></td>
+                <td class="align-middle"><?= $profil[$i]['image'] ?></td>
+                <td class="align-middle"><?= $profil[$i]['nom'] ?></td>
+                <td class="align-middle"><?= $profil[$i]['prenom'] ?></td>
+                <td class="align-middle"><?= $profil[$i]['adresse'] ?></td>
+                <td class="align-middle"><?= $profil[$i]['code_postal'] ?></td>
+                <td class="align-middle"><?= $profil[$i]['date_de_naissance'] ?></td>
+</div>
+</tr>
+<?php endfor;
+?>
+</table>
+
+</div>
+<!-- <div class="text-center">
  
     <h1 class="rounded border border-dark p-2 m-2 text-center text-white bg-success">Bienvenue dans ta page de profil,<?= $utilisateur[0]['login'] ?></h1>
 
@@ -47,8 +88,4 @@
         <a href="<?= URL ?>compte/ validation_suppressionCompte" class="btn btn-danger">Supprimer son compte</a>
 
     </div>
-</div>
-
-
-
-        
+</div> -->

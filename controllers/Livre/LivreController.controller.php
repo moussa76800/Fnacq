@@ -86,10 +86,7 @@ class LivreController extends MainController
         $repertoire = "public/Assets/images/livres/";
         $nomImageAjoute = $this->ajoutImage($file, $repertoire);
         $this->livreManager->ajoutLivreBd($_POST['title'], $_POST['author'], $_POST['numbersOfPages'], $_POST['price'], $nomImageAjoute);
-
-       
-
-        header('Location: ' . URL . "livres");
+        header('Location: ' . URL . "administration/articles");
     }
 
 
@@ -126,7 +123,7 @@ class LivreController extends MainController
         $this->livreManager->suppressionLivreBD($id);
 
         
-        header('Location: ' . URL . "livres");
+        header('Location: ' . URL . "administration/articles");
     }
 
 
@@ -161,6 +158,6 @@ class LivreController extends MainController
         }
         $this->livreManager->modificationLivreBD($_POST['identifiant'],$_POST['title'],$_POST['author'],$_POST['numbersOfPages'],$_POST['price'],$nomImageAjoute);
         
-        header('Location: '. URL . "livres");
+        header('Location: '. URL . "administration/articles");
     }
 }

@@ -25,15 +25,18 @@
             <td class="align-middle"><?=$livres[$i]->getAuthors();?></td>
             <td class="align-middle"><?=$livres[$i]->getNumbersOfPages();?></td>
             <td class="align-middle"><?=$livres[$i]->getPrice();?> Euros</td>
-           
-                <form> 
-             <td class="align-middle"><a href="<?= URL ?>livres/buy/<?= $livres[$i]->getId(); ?>" class="btn btn-info">Buy</a></td>
-        </td></form>
+            <td class="align-middle"><a href="<?= URL ?>livres/modify/<?= $livres[$i]->getId(); ?>" class="btn btn-warning">Edit</a></td>
+            <td class="align-middle">
+                <form method="POST" action="<?= URL ?>livres/delete/<?= $livres[$i]->getId(); ?>" onSubmit="return confirm('Voulez-vous vraiment supprimer le livre ?');">
+             <button class = "btn btn-danger" type="submit">Delete</button>
+            
+             
+        </form></td>
            
         </tr>
         <?php endfor; ?>
  </table>
-
+ <a href="<?= URL ?>livres/add" class="btn btn-success d-block">Add book</a>
  
 
       
