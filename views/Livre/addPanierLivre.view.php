@@ -1,4 +1,3 @@
-
 <style>
 	.img-cart {
 		display: block;
@@ -37,10 +36,10 @@
 			<div class="col-md-12">
 				<div class="panel panel-info panel-shadow">
 					<div class="panel-heading">
-						 <h3>
-							 <img class="img-circle img-thumbnail" src="<?= URL; ?>public/Assets/images/profil/<?= $_SESSION['profil']['image'] ?>" width="100px" alt="photo de profil"><br>
-							<?=$_SESSION['profil']['login'] ?>
-						</h3> 
+						<h3>
+							<img class="img-circle img-thumbnail" src="<?= URL; ?>public/Assets/images/profil/<?= $_SESSION['profil']['image'] ?>" width="100px" alt="photo de profil"><br>
+							<?= $_SESSION['profil']['login'] ?>
+						</h3>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
@@ -54,11 +53,6 @@
 										<th>Total</th>
 									</tr>
 								</thead>
-
-
-							
-								
-								
 								<tbody>
 									<tr>
 										<td><img src="<?= URL ?>public/Assets/images/livres/<?= $livree->getImage(); ?>" class="img-cart"></td>
@@ -68,11 +62,9 @@
 										<td>
 											<form method="POST" class="form-inline">
 												<input class="form-control" name="quantity" type="int" value="1">
-												
-												
-											</form>
+												<input type="hidden" name="id" value="<?= $livree->getId(); ?>">											
 										</td>
-										<td><?=number_format(  $livree->getPrice(),2,',',' '); ?> Euros</td>
+										<td><?= number_format($livree->getPrice(), 2, ',', ' '); ?> Euros</td>
 										<td><?= $livree->getPrice(); ?> Euros</td>
 									</tr>
 
@@ -81,9 +73,9 @@
 									</tr>
 									<tr>
 										<td colspan="4" class="text-right">Total Product</td>
-										<td><?= number_format(  $livree->getPrice(),2,',',' '); ?> Euros</td>
+										<td><?= number_format($livree->getPrice(), 2, ',', ' '); ?> Euros</td>
 									</tr>
-									
+
 									<tr>
 										<td colspan="4" class="text-right"><strong>Total</strong></td>
 										<td> Euros</td>
@@ -93,67 +85,15 @@
 						</div>
 					</div>
 				</div>
-                
+
 				<a href="<?= URL ?>livres" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span>Continue Shopping</a>
+				<button type="submit" class="btn btn-primary" name='addPanier'>Ajouter panier</button>
 				
-                <a href="<?= URL ?>panier" class="btn btn-primary pull-right">Ajouter au panier<span class="glyphicon glyphicon-chevron-right"></span></a>
+				
+
+				</form>
 
 			</div>
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

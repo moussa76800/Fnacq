@@ -53,13 +53,15 @@ try {
 
         case "livres":
             if (empty($url[1])) {
+                var_dump($_COOKIE['panier']);
                 $livreController->afficherLivres();
             } else if ($url[1] === "display") {
                 $livreController->afficherUnLivre($url[2]);
-            } else if ($url[1] === "buy" && Securite::estUtilisateur()) {
-                if (isset($_POST['quantity']) && isset($_POST['id'])) {
+            } else if ($url[1] === "buy") {
+                if (isset($_POST['addPanier'])) {
                     $panierController->addLivres($_POST['id'], $_POST['quantity']);
-                    header('Location: ' . URL . "livres");
+                    $livreController->buyLivre($url[2]);
+                    /* header('Location: ' . URL . "livres"); */
                 } else {
                     $livreController->buyLivre($url[2]);
                 }
@@ -92,8 +94,6 @@ try {
             if (empty($url[1])) {
                 $panierController->afficherPanier();
             }
-
-
             break;
 
         case "login":

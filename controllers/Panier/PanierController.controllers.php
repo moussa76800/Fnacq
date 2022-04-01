@@ -15,9 +15,11 @@ class PanierController extends MainController
     }
 
 public function afficherPanier(){
+        $result=$this->panierManager->panier_data();
         $data_page = [
             "page_description" => "Panier",
             "page_title" => "Panier",
+            "result" =>$result,
             "view" => "views/Panier/panier.view.php",
             "template" => "views/common/template.php"
         ];
