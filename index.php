@@ -53,7 +53,6 @@ try {
 
         case "livres":
             if (empty($url[1])) {
-                var_dump($_COOKIE['panier']);
                 $livreController->afficherLivres();
             } else if ($url[1] === "display") {
                 $livreController->afficherUnLivre($url[2]);
@@ -93,6 +92,10 @@ try {
         case "panier":
             if (empty($url[1])) {
                 $panierController->afficherPanier();
+            }elseif ($url[1] === "del") {
+                $panierController->delLivres($url[2]);
+                Toolbox::ajouterMessageAlerte("L'article a bien été supprimé !!", Toolbox::COULEUR_VERTE);
+                header('Location: ' . URL . "panier");
             }
             break;
 

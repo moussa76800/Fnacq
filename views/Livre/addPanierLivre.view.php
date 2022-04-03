@@ -50,7 +50,7 @@
 										<th>Description</th>
 										<th>Qty</th>
 										<th>Price</th>
-										<th>Total</th>
+										<th colspan="2">Total</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -66,12 +66,13 @@
 										</td>
 										<td><?= number_format($livree->getPrice(), 2, ',', ' '); ?> Euros</td>
 										<td><?= $livree->getPrice(); ?> Euros</td>
+										<td><button type="submit" class="btn btn-outline-primary" name='addPanier'>Ajouter au panier</button></td>
 									</tr>
 
 									<tr>
 										<td colspan="6">&nbsp;</td>
 									</tr>
-									<tr>
+									<!-- <tr>
 										<td colspan="4" class="text-right">Total Product</td>
 										<td><?= number_format($livree->getPrice(), 2, ',', ' '); ?> Euros</td>
 									</tr>
@@ -79,15 +80,16 @@
 									<tr>
 										<td colspan="4" class="text-right"><strong>Total</strong></td>
 										<td> Euros</td>
-									</tr>
+									</tr> -->
 								</tbody>
 							</table>
 						</div>
 					</div>
 				</div>
-
-				<a href="<?= URL ?>livres" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span>Continue Shopping</a>
-				<button type="submit" class="btn btn-primary" name='addPanier'>Ajouter panier</button>
+<br>
+				<a href="<?= URL ?>livres" class="btn btn-outline-success"><span class="glyphicon glyphicon-arrow-left"></span>Continue Shopping</a>
+				<a href="<?= URL ?>panier" class="btn btn-outline-success pull-right ">Voir le panier</a>
+				<!-- <button type="submit" class="btn btn-primary" name='addPanier'>Ajouter panier</button> -->
 				
 				
 

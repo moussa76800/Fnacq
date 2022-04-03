@@ -26,7 +26,9 @@ public function afficherPanier(){
         $this->genererPage($data_page);
     }
 
-    
+    public function delLivres($id){
+        $this->panierManager->delLivre($id);
+    }
 
     public function addLivres($id,$quantity)
     {
