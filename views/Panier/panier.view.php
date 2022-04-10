@@ -1,3 +1,12 @@
+<?php 
+require_once("./models/Livre/Livre.class.php");
+require_once("./models/Hifi/Hifi.class.php");
+require_once("./models/Livre/LivreManager.model.php");
+require_once("./models/Hifi/HifiManager.model.php");
+
+$livreManager=new LivreManager();
+?>
+
 <style>
 	.img-cart {
 		display: block;
@@ -53,10 +62,15 @@
 						</tr>
 
 						<?php 
+						
 						$total = 0;
 						foreach ($result as $key => $value) { ?>
 							<tr>
+								<?php if($value['Valeur_Image']===Livre::class): ?>
 								<td class="align-middle"><img src="public/Assets/images/livres/<?= $value['Valeur_Image']; ?>" width="60px;"></td>
+								<?php else : ?>
+									<td class="align-middle"><img src="public/Assets/images/materielsHifi/<?= $value['Valeur_Image']; ?>" width="60px;"></td>
+								<?php endif; ?>
 								<td class="align-middle"><?= $value['Valeur_Title']; ?></a></td>
 								<td class="align-middle"><?= $value['Valeur_Price']; ?> Euros</td>
 								<td class="align-middle"><?= $value['Valeur_Quantity']; ?> quantity</td>

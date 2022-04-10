@@ -17,7 +17,7 @@
     <?php endif; ?>
 </head>
 <body>
-    <?php require_once("views/common/header.php"); ?>
+    <?php require_once("views/common.dashboard/header.dashboard.php"); ?>
 
     <div class="container">
         <?php 

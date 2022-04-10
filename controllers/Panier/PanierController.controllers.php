@@ -3,6 +3,8 @@
 require_once "./controllers/MainController.controller.php";
 require_once "./models/Panier/panierManager.model.php";
 require_once "./models/Livre/Livre.class.php";
+require_once "./models/Hifi/Hifi.class.php";
+
 
 class PanierController extends MainController
 {
@@ -33,6 +35,15 @@ public function afficherPanier(){
     public function addLivres($id,$quantity)
     {
         $this->panierManager->addLivre($id,$quantity);
+        
+    }
+    public function delHifis($id){
+        $this->panierManager->delHifi($id);
+    }
+
+    public function addHifis($id,$quantity)
+    {
+        $this->panierManager->addHifi($id,$quantity);
         
     }
 }

@@ -68,9 +68,9 @@ class BlogController extends MainController
             "page_description" => "Ajout d'un article",
             "page_title" => "Ajout d'un article",
             "view" => "views/Blog/ajoutPost.view.php",
-            "template" => "views/common/template.php"
+            "template" => "views/common.dashboard/templateDash.php"
         ];
-        $this->genererPage($data_page);
+        $this->genererPageDashboard($data_page);
     }
        
     
@@ -84,7 +84,7 @@ class BlogController extends MainController
         $nomImageAjoute = $this->ajoutImage($file, $repertoire);
         $this->blogManager->ajoutPostBd($_POST['title'],$_POST['author'], $_POST['content'], $_POST['created_at'], $nomImageAjoute);
 
-        header('Location: ' . URL . "blog");
+        header('Location: ' . URL . "administration/blog");
     } 
 
 
@@ -119,7 +119,7 @@ class BlogController extends MainController
         $nomImage = $this->blogManager->getPostById($id)->getImage();
         unlink("public/Assets/images/blog/" . $nomImage);
         $this->blogManager->suppressionPostBD($id);  
-        header('Location: ' . URL . "blog");
+        header('Location: ' . URL . "administration/blog");
     }
 
 
@@ -141,9 +141,9 @@ class BlogController extends MainController
             "page_title" => "Modification d'un article",
             "post"=>$post,
             "view" => "views/Blog/modifierPost.view.php",
-            "template" => "views/common/template.php"
+            "template" => "views/common.dashboard/templateDash.php"
         ];
-        $this->genererPage($data_page);
+        $this->genererPageDashboard($data_page);
     }
 
     
@@ -165,7 +165,7 @@ class BlogController extends MainController
         }
         $this->blogManager->modificationPostBD($_POST['identifiant'],$_POST['author'],$_POST['title'],$_POST['content'],$_POST['created_at'],$nomImageAjoute);
         
-        header('Location: '. URL . "blog");
+        header('Location: '. URL . "administration/blog");
     }
 }
 

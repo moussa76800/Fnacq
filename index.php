@@ -44,7 +44,23 @@ try {
             break;
 
         case "materielsHifi":
-            $hifiController->afficherHifi();
+            if (empty($url[1])) {
+                $hifiController->afficherHifi();
+            } else if ($url[1] === "display") {
+                $hifiController->afficherUnHifi($url[2]);
+            } else if ($url[1] === "buy") {
+                if (isset($_POST['addPanier'])) {
+                    $panierController->addHifis($_POST['id'], $_POST['quantity']);
+                    $hifiController->buyHifi($url[2]);
+                    /* header('Location: ' . URL . "livres"); */
+                } else {
+                    $hifiController->buyHifi($url[2]);
+                }
+            } else {
+                Toolbox::ajouterMessageAlerte("Vous ne pouvez pas accéder à ces options car vous n'êtes pas l'administrateur !!", Toolbox::COULEUR_ROUGE);
+                header('Location: ' . URL . "accueil");
+            }
+            break;
             break;
 
         case "materielsInformatiques":
@@ -64,25 +80,6 @@ try {
                 } else {
                     $livreController->buyLivre($url[2]);
                 }
-            } else if (Securite::estAdministrateur()) {
-
-                if ($url[1] === "modify") {
-                    $livreController->modificationLivre($url[2]);
-                }
-                if ($url[1] === "validationModif") {
-                    $livreController->modifLivreValidation();
-                }
-                if ($url[1] === "add") {
-                    $livreController->ajoutLivre();
-                }
-                if ($url[1] === "validationAjout") {
-                    $livreController->ajoutLivreValidation();
-                }
-                if ($url[1] === "delete") {
-                    $livreController->suppressionLivre($url[2]);
-                } else {
-                    throw new Exception("La page est inéxistante..");
-                }
             } else {
                 Toolbox::ajouterMessageAlerte("Vous ne pouvez pas accéder à ces options car vous n'êtes pas l'administrateur !!", Toolbox::COULEUR_ROUGE);
                 header('Location: ' . URL . "accueil");
@@ -92,8 +89,9 @@ try {
         case "panier":
             if (empty($url[1])) {
                 $panierController->afficherPanier();
-            }elseif ($url[1] === "del") {
+            } elseif ($url[1] === "del") {
                 $panierController->delLivres($url[2]);
+                $panierController->delHifis($url[2]);
                 Toolbox::ajouterMessageAlerte("L'article a bien été supprimé !!", Toolbox::COULEUR_VERTE);
                 header('Location: ' . URL . "panier");
             }
@@ -281,6 +279,9 @@ try {
                 header("Location: " . URL . "accueil");
             } else {
                 switch ($url[1]) {
+                    case "accueilDash":
+                        $administrateurController->accueilDash();
+                        break;
                     case "droits":
                         $administrateurController->droits();
                         break;
@@ -299,10 +300,47 @@ try {
                         $administrateurController->showConnexionUser($url[2]);
                         header("Location: " . URL . "showConnexionUser.view.php");
                         break;
-                    case "articles":
+                    case "livres":
                         $administrateurController->afficherLivres();
-                        header("Location: " . URL . "articles.view.php");
+                        header("Location: " . URL . "livres.view.php");
                         break;
+                    case "modify":
+                        $administrateurController->modificationLivre($url[2]);
+                        break;
+                    case "validationModif":
+                        $administrateurController->modifLivreValidation();
+                        break;
+                    case "add":
+                        $administrateurController->ajoutLivre()();
+                        break;
+                    case "validationAjout":
+                        $administrateurController->ajoutLivreValidation();
+                        break;
+                    case "delete":
+                        $administrateurController->suppressionLivre($url[2]);
+                        break;
+                    case "blog":
+                        $administrateurController->afficherBlogDash($url[1]);
+                        
+                        break;
+                   /*  case "modify":
+                        $blogController->modificationPost($url[2]);
+                        break;
+                    case "validationModif":
+                        $blogController->modifPostValidation();
+                        break;
+                    case "add":
+                        $blogController->modificationPost($url[2]);
+                        break;
+                    case "validationAjout":
+                        $blogController->ajoutPostValidation();
+                        Toolbox::ajouterMessageAlerte("L'article à bien été ajouté !!", Toolbox::COULEUR_VERTE);
+                        break;
+                    case "delete":
+                        $blogController->suppressionPost($url[2]);
+                        Toolbox::ajouterMessageAlerte("L'article à bien été supprimer !!", Toolbox::COULEUR_VERTE);
+                        break; */
+
                     default:
                         throw new Exception("La page n'existe pas");
                 }

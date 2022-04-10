@@ -46,7 +46,7 @@ class LivreController extends MainController
             "page_title" => "Affichage du livre",
             "livre"=>$livre,
             "view" => "views/Livre/afficherUnLivre.view.php",
-            "template" => "views/common/template.php"
+            "template" => "views/common.dashboard/templateDash.php"
         ];
         $this->genererPage($data_page);
     }

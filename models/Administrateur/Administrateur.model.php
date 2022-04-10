@@ -3,7 +3,9 @@ require_once("./models/MainManager.model.php");
 require_once "./models/Livre/Livre.class.php";
 
 class AdministrateurManager extends MainManager{
-    
+  
+    private $livres;
+
     public function getUtilisateurs(){
         $req = $this->getBdd()->prepare("SELECT * FROM utilisateur");
         $req->execute();
@@ -11,6 +13,8 @@ class AdministrateurManager extends MainManager{
         $req->closeCursor();
         return $datas;
     }
+
+   
 
     public function bdModificationRoleUser($login,$role,$est_valide){
         $req = "UPDATE utilisateur set role = :role,est_valide=:est_valide WHERE login = :login";
@@ -73,6 +77,15 @@ public function getLivres()
         foreach ($meslivres as $livre) {
             $livres = new Livre($livre['id'], $livre['title'], $livre['authors'], $livre['numbersOfPages'], $livre['price'], $livre['image']);
             $this->ajoutLivre($livres);
+        }
+    }
+
+    public function getLivreById($id)
+    {
+        for ($i = 0; $i < count($this->livres); $i++) {
+            if ($this->livres[$i]->getId() === $id) {
+                return $this->livres[$i];
+            }
         }
     }
 public function ajoutLivre($livre)

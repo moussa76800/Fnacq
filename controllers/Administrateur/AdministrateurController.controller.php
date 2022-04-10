@@ -13,6 +13,20 @@ class AdministrateurController extends MainController
         $this->administrateurManager = new AdministrateurManager();
         $this->livreManager=new LivreManager();
         $this->livreManager ->chargementLivres();
+        $this->blogManager=new BlogManager();
+        $this->blogManager ->chargementBlogs();
+    }
+
+    public function accueilDash()
+    {
+
+        $data_page = [
+            "page_description" => "Gestion des droits",
+            "page_title" => "Gestion des droits",
+            "view" => "views/Administrateur/accueilDash.view.php",
+            "template" => "views/common.dashboard/templateDash.php"
+        ];
+        $this-> genererPageDashboard($data_page);
     }
 
     public function droits()
@@ -24,9 +38,9 @@ class AdministrateurController extends MainController
             "page_title" => "Gestion des droits",
             "utilisateurs" => $utilisateurs,
             "view" => "views/Administrateur/droits.view.php",
-            "template" => "views/common/template.php"
+            "template" => "views/common.dashboard/templateDash.php"
         ];
-        $this->genererPage($data_page);
+        $this-> genererPageDashboard($data_page);
     }
 
     public function validation_modificationRole($login, $role, $est_valide)
@@ -41,26 +55,21 @@ class AdministrateurController extends MainController
 
     
 
-    public function showProfilUser($login)
-    {
-        $profil = $this->administrateurManager->getUtilisateurByLogin($login);
-        $utilisateur = $this->administrateurManager->getUtilisateurs();
-
+    public function showProfilUser($login){   
+        $utilisateurs = $this->administrateurManager->getUtilisateurByLogin($login);
+                
         $data_page = [
             "page_description" => "Comments for One person",
             "page_title" => "Comments for One person",
-            "profil" =>$profil,
-            "utilisateur" => $utilisateur, 
+            "utilisateur" =>$utilisateurs, 
             "view" => "views/Administrateur/showProfilUser.view.php",
             "template" => "views/common/template.php"
         ];
         $this->genererPage($data_page);
     }
-
     public function showCommentUser($author)
     { 
         $comments = $this->administrateurManager->getCommentForUser($author);
-        
         var_dump($comments);
     
         $data_page = [
@@ -73,9 +82,7 @@ class AdministrateurController extends MainController
         $this->genererPage($data_page);
     }
     public function showConnexionUser($author)
-    
-    { 
-       
+    {  
         $data_page = [
             "page_description" => "Comments for One person",
             "page_title" => "Comments for One person",
@@ -84,30 +91,31 @@ class AdministrateurController extends MainController
         ];
         $this->genererPage($data_page);
     }
+
     public function afficherLivres()
     {
-        $livres = $this->livreManager->getLivres();
+        $livres = $this->administrateurManager->getLivres();
         $data_page = [
             "page_description" => "La liste des livres",
             "page_title" => "La liste des livres",
             "livres"=>$livres,
-            "view" => "views/Administrateur/articles.view.php",
-            "template" => "views/common/template.php"
+            "view" => "views/Administrateur/livres.view.php",
+            "template" => "views/common.dashboard/templateDash.php"
         ];
-        $this->genererPage($data_page);
+        $this->genererPageDashboard($data_page);
     }
 
     public function afficherUnLivre($id)
     {
-        $livre = $this->livreManager->getLivreById($id);
+        $livre = $this->administrateurManager->getLivreById($id);
         $data_page = [
             "page_description" => "Affichage du livre",
             "page_title" => "Affichage du livre",
             "livre"=>$livre,
-            "view" => "views/Livre/afficherUnLivre.view.php",
-            "template" => "views/common/template.php"
+            "view" => "views/Administrateur/afficherUnLivre.view.php",
+            "template" => "views/common.dashboard/templateDash.php"
         ];
-        $this->genererPage($data_page);
+        $this->genererPageDashboard($data_page);
     }
     
 
@@ -116,10 +124,10 @@ class AdministrateurController extends MainController
         $data_page = [
             "page_description" => "Ajout d'un livre",
             "page_title" => "Ajout d'un livre",
-            "view" => "views/Livre/ajoutLivre.view.php",
-            "template" => "views/common/template.php"
+            "view" => "views/Administrateur/ajoutLivre.view.php",
+            "template" => "views/common.dashboard/templateDash.php"
         ];
-        $this->genererPage($data_page);
+        $this->genererPageDashboard($data_page);
     }
        
     
@@ -135,7 +143,7 @@ class AdministrateurController extends MainController
 
        
 
-        header('Location: ' . URL . "administration.articles");
+        header('Location: ' . URL . "administration/livres");
     }
 
 
@@ -167,34 +175,34 @@ class AdministrateurController extends MainController
     
     public function suppressionLivre($id)
     {
-        $nomImage = $this->livreManager->getLivreById($id)->getImage();
+        $nomImage = $this->administrateurManager->getLivreById($id)->getImage();
         unlink("public/Assets/images/livres/" . $nomImage);
         $this->livreManager->suppressionLivreBD($id);
 
         
-        header('Location: ' . URL .  "administration/articles");
+        header('Location: ' . URL .  "administration/livres");
     }
 
 
 
     public function modificationLivre($id)
     {
-        $livre = $this->livreManager->getLivreById($id);
+        $livre = $this->administrateurManager->getLivreById($id);
         $data_page = [
             "page_description" => "Ajout d'un livre",
             "page_title" => "Ajout d'un livre",
             "livre"=>$livre,
-            "view" => "views/Livre/modifierLivre.view.php",
-            "template" => "views/common/template.php"
+            "view" => "views/Administrateur/modifierLivre.view.php",
+            "template" => "views/common.dashboard/templateDash.php"
         ];
-        $this->genererPage($data_page);
+        $this-> genererPageDashboard($data_page);
     }
 
     
 
     public function modifLivreValidation()
     {
-        $imageActuelle = $this->livreManager->getLivreById($_POST['identifiant'])->getImage();
+        $imageActuelle = $this->administrateurManager->getLivreById($_POST['identifiant'])->getImage();
         $file = $_FILES['image'];
 
         if ($file['size'] > 0) {
@@ -207,9 +215,20 @@ class AdministrateurController extends MainController
         }
         $this->livreManager->modificationLivreBD($_POST['identifiant'],$_POST['title'],$_POST['author'],$_POST['numbersOfPages'],$_POST['price'],$nomImageAjoute);
         
-        header('Location: '. URL .  "administration/articles");
+        header('Location: '. URL .  "administration/livres");
     }
-    
+    public function afficherBlogDash()
+    {
+        $posts = $this->blogManager->getPosts();
+        $data_page = [
+            "page_description" => "Page du Blog",
+            "page_title" => "Page du Blog",
+            "posts" => $posts,
+            "view" => "views/Administrateur/blogDash.view.php",
+            "template" => "views/common.dashboard/templateDash.php"
+        ];
+        $this->genererPageDashboard($data_page);
+    }
 
 
     public function pageErreur($msg)
