@@ -46,11 +46,19 @@ class BlogManager extends MainManager
 
 
 
+<<<<<<< HEAD
     public function ajoutPostBd($title, $author, $content, $created_at, $image)
     {
 
         $req = "INSERT INTO posts (title,author,content,image,created_at)
     values (:title,:author,:content,:image,: NOW() )";
+=======
+    public function ajoutPostBd($title, $author, $content, $image, $created_at)
+    {
+
+        $req = "INSERT INTO posts (title,author,content,image,created_at)
+    values (:title,:author,:content,:image,now() )";
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
         $stmt = $this->getBdd()->prepare($req);
 
 
@@ -58,11 +66,20 @@ class BlogManager extends MainManager
         $stmt->bindValue(":author", $author, PDO::PARAM_STR);
         $stmt->bindValue(":content", $content, PDO::PARAM_STR);
         $stmt->bindValue(":image", $image, PDO::PARAM_STR);
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
         $resultat = $stmt->execute();
         $stmt->closeCursor();
 
         if ($resultat > 0) {
+<<<<<<< HEAD
             $post = new Blog($this->getBdd()->lastInsertId(), $title, $author, $content, localtime(), $image);
+=======
+            $post = new Blog($this->getBdd()->lastInsertId(), $title, $author, $content,$image, localtime() );
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
             $this->ajoutPost($post);
         }
     }
@@ -83,11 +100,19 @@ class BlogManager extends MainManager
         }
     }
 
+<<<<<<< HEAD
     public function modificationPostBD($id, $author, $title, $content, $created_at, $image)
     {
 
         $req = 'update posts
         SET author = :author,title = :title, content = :content,created_at = :created_at,image = :image 
+=======
+    public function modificationPostBD($id, $author, $title, $content,$image, $created_at )
+    {
+
+        $req = 'update posts
+        SET author = :author,title = :title, content = :content,image = :image,created_at = :created_at 
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
     where id = :id';
 
         $stmt = $this->getBdd()->prepare($req);
@@ -95,8 +120,14 @@ class BlogManager extends MainManager
         $stmt->bindValue(":author", $author, PDO::PARAM_STR);
         $stmt->bindValue(":title", $title, PDO::PARAM_STR);
         $stmt->bindValue(":content", $content, PDO::PARAM_STR);
+<<<<<<< HEAD
         $stmt->bindValue(":created_at", $created_at, PDO::PARAM_STR);
         $stmt->bindValue(":image", $image, PDO::PARAM_STR);
+=======
+        $stmt->bindValue(":image", $image, PDO::PARAM_STR);
+        $stmt->bindValue(":created_at", $created_at, PDO::PARAM_STR);
+        
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
         $resultat = $stmt->execute();
         $stmt->closeCursor();
 
@@ -111,20 +142,35 @@ class BlogManager extends MainManager
 
 
 
+<<<<<<< HEAD
      public function getPostByTitle($title)
     {
         for ($i = 0; $i < count($this->posts); $i++) {
             if ( strpos(strtolower($this->posts[$i]->getTitle()), strtolower($title)) !== false) {
+=======
+    public function getPostByTitle($title)
+    {
+        for ($i = 0; $i < count($this->posts); $i++) {
+            if (strpos(strtolower($this->posts[$i]->getTitle()), strtolower($title)) !== false) {
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
                 $ArrayPost[] = $this->posts[$i];
             }
         }
         if (isset($ArrayPost)) {
             return $ArrayPost;
+<<<<<<< HEAD
         }else {
             return null;
         }
     } 
      /* public function findBlogDb($title)
+=======
+        } else {
+            return null;
+        }
+    }
+    /* public function findBlogDb($title)
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
     {
 
         $req =  "SELECT  `id`, `title`,`author`, `content`,`image`, `created_at` FROM `posts` WHERE `title` LIKE '%title%'";

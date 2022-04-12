@@ -30,6 +30,7 @@
                 <td class="align-middle"><img src="public/Assets/images/blog/<?= $posts[$i]->getImage(); ?>" width="250px;"></td>
                 <td class="align-middle"><a href="<?= URL ?>blog/afficherUnPost/<?= $posts[$i]->getId(); ?>"><?= $posts[$i]->getTitle(); ?></a></td>
                 <td class="align-middle"><?= $posts[$i]->getAuthor(); ?></td>
+<<<<<<< HEAD
                 <td class="align-middle"><?= $posts[$i]->getCreated_at(); ?></td>
                 <td class="align-middle"><a href="<?= URL ?>blog/modify/<?= $posts[$i]->getId(); ?>" class="btn btn-warning">Edit</a></td>
                 <td class="align-middle">
@@ -43,3 +44,9 @@
     </table>
 
     <a href="<?= URL ?>blog/add" class="btn btn-success d-block">Add post</a>
+=======
+                <td class="align-middle"><?= $posts[$i]->getCreated_at(); ?></td>            
+            </tr>
+        <?php endfor; ?>
+    </table>
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69

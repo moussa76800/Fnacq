@@ -5,19 +5,35 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<<<<<<< HEAD
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="<?= URL ?>accueil">Accueil</a>
         </li>
 
+=======
+         <?php if (!Securite::estAdministrateur()) : ?>
+          <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="<?= URL ?>accueil">Accueil</a>
+        </li>
+       
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Articles
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+<<<<<<< HEAD
+=======
+          
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
             <li><a class="dropdown-item" href="<?= URL ?>livres">Livres</a></li>
             <li><a class="dropdown-item" href="<?= URL ?>materielsInformatiques">Matériels Informatiques</a></li>
             <li><a class="dropdown-item" href="<?= URL ?>materielsHifi">Matériels Hifi</a></li>
             <li><a class="dropdown-item" href="<?= URL ?>panier">Panier</a></li>
+<<<<<<< HEAD
+=======
+            
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
           </ul>
         </li>
 
@@ -46,6 +62,7 @@
             <li><a class="dropdown-item" href="<?= URL ?>blog">Blog</a></a></li>
           </ul>
         </li>
+<<<<<<< HEAD
         <?php if (Securite::estConnecte() && Securite::estAdministrateur()): ?>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -59,6 +76,23 @@
             <li><a class="dropdown-item" href="<?= URL ?>administration/droits">Consulter la liste des achats effectués par un UM</a></li>
             <li><a class="dropdown-item" href="<?= URL ?>administration/showBlogUser">Consulter les 5 derniers commentaires d'un UM</a></li>
            
+=======
+        <?php endif; ?>
+        <?php if (Securite::estConnecte() && Securite::estAdministrateur()): ?>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="<?= URL ?>administration" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Administration 
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="<?= URL ?>administration/accueilDash">Dashboard</a></li>
+            <!-- <li><a class="dropdown-item" href="<?= URL ?>administration/droits">Nombre de connexions d'un UM</a></li>
+            <li><a class="dropdown-item" href="<?= URL ?>administration/droits">Liste des achats effectués par un UM</a></li>
+            <li><a class="dropdown-item" href="<?= URL ?>administration/livres">Gestion des articles 'livres'</a></li>
+            <li><a class="dropdown-item" href="<?= URL ?>administration/informatiques">Gestion des articles 'Informatiques'</a></li>
+            <li><a class="dropdown-item" href="<?= URL ?>administration/hifis">Gestion des articles 'Hifis'</a></li>
+            <li><a class="dropdown-item" href="<?= URL ?>administration/blog">Gestion du Blog</a></li> -->
+
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
           </ul>
         </li>
         <?php endif; ?>

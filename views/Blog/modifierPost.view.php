@@ -16,8 +16,13 @@
     </div>
 
     <div class="form-group"style="font-weight: bold">
+<<<<<<< HEAD
         <label for="comment">Comment : </label>
         <input type="text" class="form-control" id="comment" name="comment" value="<?= $post->getComment() ?>">
+=======
+        <label for="content">Content : </label>
+        <input type="text" class="form-control" id="content" name="content" value="<?= $post->getContent() ?>">
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
     </div>
 
     <div class="form-group"style="font-weight: bold">

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
      // à mettre tout en haut de la page
     //.... autres scripts
@@ -5,6 +6,8 @@
     $_SESSION['mesAchats'] = $achat; // on enregistre le tableau $achat dans la session
     ?>
 
+=======
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
 <style>
 	.img-cart {
 		display: block;
@@ -43,10 +46,17 @@
 			<div class="col-md-12">
 				<div class="panel panel-info panel-shadow">
 					<div class="panel-heading">
+<<<<<<< HEAD
 						 <h3>
 							 <img class="img-circle img-thumbnail" src="<?= URL; ?>public/Assets/images/profil/<?= $_SESSION['profil']['image'] ?>" width="100px" alt="photo de profil"><br>
 							<?=$_SESSION['profil']['login'] ?>
 						</h3> 
+=======
+						<h3>
+							<img class="img-circle img-thumbnail" src="<?= URL; ?>public/Assets/images/profil/<?= $_SESSION['profil']['image'] ?>" width="100px" alt="photo de profil"><br>
+							<?= $_SESSION['profil']['login'] ?>
+						</h3>
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
@@ -57,11 +67,17 @@
 										<th>Description</th>
 										<th>Qty</th>
 										<th>Price</th>
+<<<<<<< HEAD
 										<th>Total</th>
 									</tr>
 								</thead>
 
 
+=======
+										<th colspan="2">Total</th>
+									</tr>
+								</thead>
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
 								<tbody>
 									<tr>
 										<td><img src="<?= URL ?>public/Assets/images/livres/<?= $livree->getImage(); ?>" class="img-cart"></td>
@@ -69,6 +85,7 @@
 											<p><a href="<?= URL ?>livres/display/<?= $livree->getId(); ?>"><?= $livree->getTitle(); ?></a></p>
 										</td>
 										<td>
+<<<<<<< HEAD
 											<form class="form-inline">
 												<input class="form-control" type="text" value="1">
 												<button rel="tooltip" class="btn btn-default"><i class="fa fa-pencil"></i></button>
@@ -77,11 +94,21 @@
 										</td>
 										<td><?= $livree->getPrice(); ?> Euros</td>
 										<td><?= $livree->getPrice(); ?> Euros</td>
+=======
+											<form method="POST" class="form-inline">
+												<input class="form-control" name="quantity" type="int" value="1">
+												<input type="hidden" name="id" value="<?= $livree->getId(); ?>">											
+										</td>
+										<td><?= number_format($livree->getPrice(), 2, ',', ' '); ?> Euros</td>
+										<td><?= $livree->getPrice(); ?> Euros</td>
+										<td><button type="submit" class="btn btn-outline-primary" name='addPanier'>Ajouter au panier</button></td>
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
 									</tr>
 
 									<tr>
 										<td colspan="6">&nbsp;</td>
 									</tr>
+<<<<<<< HEAD
 									<tr>
 										<td colspan="4" class="text-right">Total Product</td>
 										<td><?= $livree->getPrice(); ?> Euros</td>
@@ -94,11 +121,23 @@
 										<td colspan="4" class="text-right"><strong>Total</strong></td>
 										<td><?= $livree->getPrice(); ?> Euros</td>
 									</tr>
+=======
+									<!-- <tr>
+										<td colspan="4" class="text-right">Total Product</td>
+										<td><?= number_format($livree->getPrice(), 2, ',', ' '); ?> Euros</td>
+									</tr>
+
+									<tr>
+										<td colspan="4" class="text-right"><strong>Total</strong></td>
+										<td> Euros</td>
+									</tr> -->
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
 								</tbody>
 							</table>
 						</div>
 					</div>
 				</div>
+<<<<<<< HEAD
 				<a href="<?= URL ?>livres" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span>Continue Shopping</a>
 				<a href="#" class="btn btn-primary pull-right">Next<span class="glyphicon glyphicon-chevron-right"></span></a>
 			</div>
@@ -279,3 +318,18 @@
 	<?php endfor; ?>
 	</table>
 </div> --> -->
+=======
+<br>
+				<a href="<?= URL ?>livres" class="btn btn-outline-success"><span class="glyphicon glyphicon-arrow-left"></span>Continue Shopping</a>
+				<a href="<?= URL ?>panier" class="btn btn-outline-success pull-right ">Voir le panier</a>
+				<!-- <button type="submit" class="btn btn-primary" name='addPanier'>Ajouter panier</button> -->
+				
+				
+
+				</form>
+
+			</div>
+		</div>
+	</div>
+</div>
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69

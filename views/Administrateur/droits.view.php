@@ -43,7 +43,19 @@
                         <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
                             <option selected>Choose...</option>
                             <option value="1">Today</option>
+<<<<<<< HEAD
                             <option value="2">The last 7 days</option>
+=======
+                            <option value="2">Yesterday</option>
+                            <option value="3">Before yesterday</option>
+                            <option value="4">Day -4</option>
+                            <option value="5">Day -5</option>
+                            <option value="6">Day -6</option>
+                            <option value="7">Day -7</option>
+                            <option value="8">Day -8</option>
+                            
+                           
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
                         </select>
                         </div>
                     </form>

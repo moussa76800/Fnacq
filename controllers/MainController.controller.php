@@ -19,6 +19,18 @@ abstract class MainController
         require_once($template);
     }
 
+<<<<<<< HEAD
+=======
+    protected function genererPageDashboard($data)
+    {
+        extract($data);
+        ob_start();
+        require_once($view);
+        $page_content = ob_get_clean();
+        require_once("./views/common.dashboard/templateDash.php");
+    }
+
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
 
 
     protected function pageErreur($msg)

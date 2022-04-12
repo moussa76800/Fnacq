@@ -31,6 +31,15 @@ class LivreController extends MainController
         $this->genererPage($data_page);
     }
 
+<<<<<<< HEAD
+=======
+    // panier
+    public function addPanierLivre($id)
+    {
+        return $this->livreManager->getLivreById($id);
+    }
+    // panier
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
 
     public function afficherUnLivre($id)
     {
@@ -40,7 +49,11 @@ class LivreController extends MainController
             "page_title" => "Affichage du livre",
             "livre"=>$livre,
             "view" => "views/Livre/afficherUnLivre.view.php",
+<<<<<<< HEAD
             "template" => "views/common/template.php"
+=======
+            "template" => "views/common.dashboard/templateDash.php"
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
         ];
         $this->genererPage($data_page);
     }
@@ -57,9 +70,13 @@ class LivreController extends MainController
         $this->genererPage($data_page);
     }
 
+<<<<<<< HEAD
     public function panierLivre($id){
         
     }
+=======
+    
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
 
     public function ajoutLivre()
     {
@@ -82,10 +99,14 @@ class LivreController extends MainController
         $repertoire = "public/Assets/images/livres/";
         $nomImageAjoute = $this->ajoutImage($file, $repertoire);
         $this->livreManager->ajoutLivreBd($_POST['title'], $_POST['author'], $_POST['numbersOfPages'], $_POST['price'], $nomImageAjoute);
+<<<<<<< HEAD
 
        
 
         header('Location: ' . URL . "livres");
+=======
+        header('Location: ' . URL . "administration/articles");
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
     }
 
 
@@ -122,7 +143,11 @@ class LivreController extends MainController
         $this->livreManager->suppressionLivreBD($id);
 
         
+<<<<<<< HEAD
         header('Location: ' . URL . "livres");
+=======
+        header('Location: ' . URL . "administration/articles");
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
     }
 
 
@@ -157,6 +182,10 @@ class LivreController extends MainController
         }
         $this->livreManager->modificationLivreBD($_POST['identifiant'],$_POST['title'],$_POST['author'],$_POST['numbersOfPages'],$_POST['price'],$nomImageAjoute);
         
+<<<<<<< HEAD
         header('Location: '. URL . "livres");
+=======
+        header('Location: '. URL . "administration/articles");
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
     }
 }

@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 <?php
 session_id();
 $filename = "hit_counter.txt";
@@ -26,6 +27,18 @@ else {
 
     <div>
         <div>
+=======
+<div class="text-center">
+    <h1 class="rounded border border-dark p-2 m-2 text-center text-white bg-success">Bienvenue dans ta page de profil,<?= $utilisateur['login'] ?></h1>
+ <?php
+require ("./functions/compteur.php");
+ajouter_vue()
+?>
+<h2 class="rounded border border-dark p-2 m-2 text-center ">Nombre de connexion : <?=nb_vues()?>
+<!-- <h2 class="rounded border border-dark p-2 m-2 text-center ">Nombre de connexion : <a href="http://www.mon-compteur.fr"><img src="http://www.mon-compteur.fr/html_c02genv2-74685-1" border="0" /></a> -->
+    <div>
+        <div>            
+>>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
             
 
             <img src="<?= URL; ?>public/Assets/images/<?= $utilisateur['image'] ?>" width="100px" alt="photo de profil" />
