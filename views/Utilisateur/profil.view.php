@@ -1,11 +1,12 @@
 
 <div class="text-center">
     <h1 class="rounded border border-dark p-2 m-2 text-center text-white bg-success">Bienvenue dans ta page de profil,<?= $utilisateur['login'] ?></h1>
-<?php
+ <?php
 require ("./functions/compteur.php");
 ajouter_vue()
 ?>
 <h2 class="rounded border border-dark p-2 m-2 text-center ">Nombre de connexion : <?=nb_vues()?>
+<!-- <h2 class="rounded border border-dark p-2 m-2 text-center ">Nombre de connexion : <a href="http://www.mon-compteur.fr"><img src="http://www.mon-compteur.fr/html_c02genv2-74685-1" border="0" /></a> -->
     <div>
         <div>            
             

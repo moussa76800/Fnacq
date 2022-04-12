@@ -44,8 +44,8 @@ $livreManager=new LivreManager();
 				<div class="panel panel-info panel-shadow">
 					<div class="panel-heading">
 						<h3>
-							<img class="img-circle img-thumbnail" src="<?= URL; ?>public/Assets/images/profil/<?= $_SESSION['profil']['image'] ?>" width="100px" alt="photo de profil"><br>
-							<?= $_SESSION['profil']['login'] ?>
+							<!-- <img class="img-circle img-thumbnail" src="<?= URL; ?>public/Assets/images/profil/<?= $_SESSION['profil']['image'] ?>" width="100px" alt="photo de profil"><br>
+							<?= $_SESSION['profil']['login'] ?> -->
 						</h3>
 					</div>
 					<br>

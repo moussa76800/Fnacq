@@ -3,7 +3,7 @@
 
     <br>
 
-    <form method="POST" action="<?= URL ?>adiministration/blog">
+    <form method="POST" action="<?= URL ?>administration/blog">
         <div class="input-group">
             <input type="search" class="form-control rounded text-center" name="findPost" height="50px" placeholder="Search the title of post" aria-label="Search" aria-describedby="search-addon" />
             <button name="submit" class="btn btn-primary"  style="font-weight: bold">Search</button>

@@ -87,14 +87,16 @@ try {
             break;
 
         case "panier":
+             
             if (empty($url[1])) {
                 $panierController->afficherPanier();
-            } elseif ($url[1] === "del") {
+            } else if ($url[1] === "del") {
                 $panierController->delLivres($url[2]);
                 $panierController->delHifis($url[2]);
                 Toolbox::ajouterMessageAlerte("L'article a bien été supprimé !!", Toolbox::COULEUR_VERTE);
                 header('Location: ' . URL . "panier");
             }
+       
             break;
 
         case "login":
@@ -302,7 +304,7 @@ try {
                         break;
                     case "livres":
                         $administrateurController->afficherLivres();
-                        header("Location: " . URL . "livres.view.php");
+                        
                         break;
                     case "modify":
                         $administrateurController->modificationLivre($url[2]);
@@ -321,7 +323,6 @@ try {
                         break;
                     case "blog":
                         $administrateurController->afficherBlogDash($url[1]);
-                        
                         break;
                    /*  case "modify":
                         $blogController->modificationPost($url[2]);

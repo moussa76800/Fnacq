@@ -17,7 +17,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="<?= URL ?>administration/livres">Gestion des articles Livres</a></li>
-            <li><a class="dropdown-item" href="<?= URL ?>materielsInformatiques">Gestion des articles Informatiques</a></li>
+            <li><a class="dropdown-item" href="<?= URL ?>administration/hifis">Gestion des articles Informatiques</a></li>
             <li><a class="dropdown-item" href="<?= URL ?>materielsHifi">Gestion des articles Hifi</a></li>
 
 
