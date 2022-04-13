@@ -1,30 +1,16 @@
 <?php
 require_once  "./models/MainManager.model.php";
-<<<<<<< HEAD
-
-
-class HifiManager extends MainManager{
-
-    public function getHifi()
-=======
 require_once "Hifi.class.php";
 
 class HifiManager extends MainManager{
 
     /* public function getHifi()
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
     {
         $req = $this->getBdd()->prepare("SELECT * FROM hifi");
         $req->execute();
         $datas = $req->fetchAll(PDO::FETCH_ASSOC);
         $req->closeCursor();
         return $datas;
-<<<<<<< HEAD
-    }
-
-
-}
-=======
     } */
     
         private $hifis; // TABLEAU DE Hifi
@@ -126,4 +112,3 @@ class HifiManager extends MainManager{
     
     }
     
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69

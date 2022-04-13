@@ -15,10 +15,7 @@ require_once("./controllers/Tchat/TchatsControllers.controller.php");
 require_once("./controllers/Blog/blogController.controller.php");
 require_once("./controllers/Administrateur/AdministrateurController.controller.php");
 require_once("./controllers/Blog/CommentController.controller.php");
-<<<<<<< HEAD
-=======
 require_once("./controllers/Panier/PanierController.controllers.php");
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
 
 
 
@@ -31,10 +28,7 @@ $tchatController = new TchatsControllers();
 $blogController = new BlogController();
 $administrateurController = new AdministrateurController();
 $commentController = new CommentController();
-<<<<<<< HEAD
-=======
 $panierController = new PanierController();
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
 
 try {
     if (empty($_GET['page'])) {
@@ -50,9 +44,6 @@ try {
             break;
 
         case "materielsHifi":
-<<<<<<< HEAD
-            $hifiController->afficherHifi();
-=======
             if (empty($url[1])) {
                 $hifiController->afficherHifi();
             } else if ($url[1] === "display") {
@@ -70,7 +61,6 @@ try {
                 header('Location: ' . URL . "accueil");
             }
             break;
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
             break;
 
         case "materielsInformatiques":
@@ -82,33 +72,6 @@ try {
                 $livreController->afficherLivres();
             } else if ($url[1] === "display") {
                 $livreController->afficherUnLivre($url[2]);
-<<<<<<< HEAD
-            } else if (Securite::estUtilisateur()) {
-                if ($url[1] === "buy") {
-                    $livreController->buyLivre($url[2]);
-                }
-                if ($url[1] === "continueShop")
-                    $livreController->panierLivre($url[2]);
-                
-            } else if (Securite::estAdministrateur()) {
-
-                if ($url[1] === "modify") {
-                    $livreController->modificationLivre($url[2]);
-                }
-                if ($url[1] === "validationModif") {
-                    $livreController->modifLivreValidation();
-                }
-                if ($url[1] === "add") {
-                    $livreController->ajoutLivre();
-                }
-                if ($url[1] === "validationAjout") {
-                    $livreController->ajoutLivreValidation();
-                }
-                if ($url[1] === "delete") {
-                    $livreController->suppressionLivre($url[2]);
-                } else {
-                    throw new Exception("La page est inéxistante..");
-=======
             } else if ($url[1] === "buy") {
                 if (isset($_POST['addPanier'])) {
                     $panierController->addLivres($_POST['id'], $_POST['quantity']);
@@ -116,18 +79,11 @@ try {
                     /* header('Location: ' . URL . "livres"); */
                 } else {
                     $livreController->buyLivre($url[2]);
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
                 }
             } else {
                 Toolbox::ajouterMessageAlerte("Vous ne pouvez pas accéder à ces options car vous n'êtes pas l'administrateur !!", Toolbox::COULEUR_ROUGE);
                 header('Location: ' . URL . "accueil");
             }
-<<<<<<< HEAD
-
-            break;
-            case "panier":
-                break;
-=======
             break;
 
         case "panier":
@@ -142,7 +98,6 @@ try {
             }
        
             break;
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
 
         case "login":
             $visiteurController->login();
@@ -326,12 +281,9 @@ try {
                 header("Location: " . URL . "accueil");
             } else {
                 switch ($url[1]) {
-<<<<<<< HEAD
-=======
                     case "accueilDash":
                         $administrateurController->accueilDash();
                         break;
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
                     case "droits":
                         $administrateurController->droits();
                         break;
@@ -342,16 +294,6 @@ try {
                         $administrateurController->showProfilUser($url[2]);
                         header("Location: " . URL . "showProfilUser.view.php");
                         break;
-<<<<<<< HEAD
-                        case "showCommentUser":
-                            $administrateurController->showCommentUser($url[2]);
-                            header("Location: " . URL . "showCommentUser.view.php");
-                            break;
-                            case "showConnectionUser":
-                                $administrateurController->showConnexionUser($url[2]);
-                                header("Location: " . URL . "showConnexionUser.view.php");
-                                break;
-=======
                     case "showCommentUser":
                         $administrateurController->showCommentUser($url[2]);
                         header("Location: " . URL . "showCommentUser.view.php");
@@ -400,7 +342,6 @@ try {
                         Toolbox::ajouterMessageAlerte("L'article à bien été supprimer !!", Toolbox::COULEUR_VERTE);
                         break; */
 
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
                     default:
                         throw new Exception("La page n'existe pas");
                 }

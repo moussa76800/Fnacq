@@ -19,8 +19,6 @@ abstract class MainController
         require_once($template);
     }
 
-<<<<<<< HEAD
-=======
     protected function genererPageDashboard($data)
     {
         extract($data);
@@ -30,7 +28,6 @@ abstract class MainController
         require_once("./views/common.dashboard/templateDash.php");
     }
 
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
 
 
     protected function pageErreur($msg)

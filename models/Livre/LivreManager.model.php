@@ -83,13 +83,8 @@ class LivreManager extends MainManager
     public function modificationLivreBD($id,$title,$authors,$numbersOfPages,$price,$image)
     {
         $req = 'update livres 
-<<<<<<< HEAD
-    set title = :title, authors = :authors, numbersOfPages = :numbersOfPages, price = :price, image = :image 
-    where id = :id';
-=======
     SET title = :title, authors = :authors, numbersOfPages = :numbersOfPages, price = :price, image = :image 
     WHERE id = :id';
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
 
         $stmt = $this->getBdd()->prepare($req);
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);

@@ -68,15 +68,11 @@ class BlogController extends MainController
             "page_description" => "Ajout d'un article",
             "page_title" => "Ajout d'un article",
             "view" => "views/Blog/ajoutPost.view.php",
-<<<<<<< HEAD
-            "template" => "views/common/template.php"
-        ];
-        $this->genererPage($data_page);
-=======
+
             "template" => "views/common.dashboard/templateDash.php"
         ];
         $this->genererPageDashboard($data_page);
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
+
     }
        
     
@@ -90,11 +86,7 @@ class BlogController extends MainController
         $nomImageAjoute = $this->ajoutImage($file, $repertoire);
         $this->blogManager->ajoutPostBd($_POST['title'],$_POST['author'], $_POST['content'], $_POST['created_at'], $nomImageAjoute);
 
-<<<<<<< HEAD
-        header('Location: ' . URL . "blog");
-=======
         header('Location: ' . URL . "administration/blog");
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
     } 
 
 
@@ -129,11 +121,7 @@ class BlogController extends MainController
         $nomImage = $this->blogManager->getPostById($id)->getImage();
         unlink("public/Assets/images/blog/" . $nomImage);
         $this->blogManager->suppressionPostBD($id);  
-<<<<<<< HEAD
-        header('Location: ' . URL . "blog");
-=======
         header('Location: ' . URL . "administration/blog");
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
     }
 
 
@@ -155,15 +143,9 @@ class BlogController extends MainController
             "page_title" => "Modification d'un article",
             "post"=>$post,
             "view" => "views/Blog/modifierPost.view.php",
-<<<<<<< HEAD
-            "template" => "views/common/template.php"
-        ];
-        $this->genererPage($data_page);
-=======
             "template" => "views/common.dashboard/templateDash.php"
         ];
         $this->genererPageDashboard($data_page);
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
     }
 
     
@@ -185,11 +167,7 @@ class BlogController extends MainController
         }
         $this->blogManager->modificationPostBD($_POST['identifiant'],$_POST['author'],$_POST['title'],$_POST['content'],$_POST['created_at'],$nomImageAjoute);
         
-<<<<<<< HEAD
-        header('Location: '. URL . "blog");
-=======
         header('Location: '. URL . "administration/blog");
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
     }
 }
 

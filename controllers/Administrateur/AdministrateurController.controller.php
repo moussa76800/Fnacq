@@ -1,24 +1,16 @@
 <?php
 require_once("./controllers/MainController.controller.php");
 require_once("./models/Administrateur/Administrateur.model.php");
-<<<<<<< HEAD
-=======
 require_once("./models/Livre/LivreManager.model.php");
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
 
 class AdministrateurController extends MainController
 {
     private $administrateurManager;
-<<<<<<< HEAD
-=======
     private $livreManager;
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
 
     public function __construct()
     {
         $this->administrateurManager = new AdministrateurManager();
-<<<<<<< HEAD
-=======
         $this->livreManager=new LivreManager();
         $this->livreManager ->chargementLivres();
         $this->blogManager=new BlogManager();
@@ -35,7 +27,6 @@ class AdministrateurController extends MainController
             "template" => "views/common.dashboard/templateDash.php"
         ];
         $this-> genererPageDashboard($data_page);
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
     }
 
     public function droits()
@@ -47,15 +38,9 @@ class AdministrateurController extends MainController
             "page_title" => "Gestion des droits",
             "utilisateurs" => $utilisateurs,
             "view" => "views/Administrateur/droits.view.php",
-<<<<<<< HEAD
-            "template" => "views/common/template.php"
-        ];
-        $this->genererPage($data_page);
-=======
             "template" => "views/common.dashboard/templateDash.php"
         ];
         $this-> genererPageDashboard($data_page);
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
     }
 
     public function validation_modificationRole($login, $role, $est_valide)
@@ -70,12 +55,7 @@ class AdministrateurController extends MainController
 
     
 
-<<<<<<< HEAD
-    public function showProfilUser($login)
-    {
-=======
     public function showProfilUser($login){   
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
         $utilisateurs = $this->administrateurManager->getUtilisateurByLogin($login);
                 
         $data_page = [
@@ -87,17 +67,9 @@ class AdministrateurController extends MainController
         ];
         $this->genererPage($data_page);
     }
-<<<<<<< HEAD
-
     public function showCommentUser($author)
     { 
         $comments = $this->administrateurManager->getCommentForUser($author);
-        
-=======
-    public function showCommentUser($author)
-    { 
-        $comments = $this->administrateurManager->getCommentForUser($author);
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
         var_dump($comments);
     
         $data_page = [
@@ -110,13 +82,7 @@ class AdministrateurController extends MainController
         $this->genererPage($data_page);
     }
     public function showConnexionUser($author)
-<<<<<<< HEAD
-    
-    { 
-       
-=======
     {  
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
         $data_page = [
             "page_description" => "Comments for One person",
             "page_title" => "Comments for One person",
@@ -125,10 +91,6 @@ class AdministrateurController extends MainController
         ];
         $this->genererPage($data_page);
     }
-<<<<<<< HEAD
-    
-
-=======
 
     public function afficherLivres()
     {
@@ -268,7 +230,6 @@ class AdministrateurController extends MainController
         $this->genererPageDashboard($data_page);
     }
 
->>>>>>> 452b56c6bfadca54e57a47b527ca1798558e8a69
 
     public function pageErreur($msg)
     {
